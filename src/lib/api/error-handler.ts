@@ -7,17 +7,17 @@
  */
 
 export interface ProblemDetails {
-  type: string; // URI reference identifying the problem type
-  title: string; // Short, human-readable summary
-  status: number; // HTTP status code
-  detail?: string; // Human-readable explanation
-  instance?: string; // URI reference identifying the specific occurrence
-  errors?: Array<{
-    path?: string;
-    message: string;
-    [key: string]: unknown;
-  }>;
-  [key: string]: unknown; // Extension members allowed
+    type: string; // URI reference identifying the problem type
+    title: string; // Short, human-readable summary
+    status: number; // HTTP status code
+    detail?: string; // Human-readable explanation
+    instance?: string; // URI reference identifying the specific occurrence
+    errors?: Array<{
+        path?: string;
+        message: string;
+        [key: string]: unknown;
+    }>;
+    [key: string]: unknown; // Extension members allowed
 }
 
 /**
@@ -32,48 +32,48 @@ export interface ProblemDetails {
  * @returns Response with application/problem+json
  */
 export function problemJson(
-  status: number,
-  type: string,
-  title: string,
-  detail?: string,
-  instance?: string,
-  errors?: Array<{ path?: string; message: string }>
+    status: number,
+    type: string,
+    title: string,
+    detail?: string,
+    instance?: string,
+    errors?: Array<{ path?: string; message: string }>
 ): Response {
-  const problem: ProblemDetails = {
-    type,
-    title,
-    status,
-  };
+    const problem: ProblemDetails = {
+        type,
+        title,
+        status,
+    };
 
-  if (detail) {
-    problem.detail = detail;
-  }
+    if (detail) {
+        problem.detail = detail;
+    }
 
-  if (instance) {
-    problem.instance = instance;
-  }
+    if (instance) {
+        problem.instance = instance;
+    }
 
-  if (errors && errors.length > 0) {
-    problem.errors = errors;
-  }
+    if (errors && errors.length > 0) {
+        problem.errors = errors;
+    }
 
-  return new Response(JSON.stringify(problem), {
-    status,
-    headers: {
-      'Content-Type': 'application/problem+json',
-    },
-  });
+    return new Response(JSON.stringify(problem), {
+        status,
+        headers: {
+            'Content-Type': 'application/problem+json',
+        },
+    });
 }
 
 /**
  * Common problem types for Yello Solar Hub
  */
 export const ProblemTypes = {
-  VALIDATION: 'https://yello.solar/errors/validation',
-  NOT_FOUND: 'https://yello.solar/errors/not-found',
-  INTERNAL: 'https://yello.solar/errors/internal',
-  UNAUTHORIZED: 'https://yello.solar/errors/unauthorized',
-  FORBIDDEN: 'https://yello.solar/errors/forbidden',
-  CONFLICT: 'https://yello.solar/errors/conflict',
-  RATE_LIMIT: 'https://yello.solar/errors/rate-limit',
+    VALIDATION: 'https://yello.solar/errors/validation',
+    NOT_FOUND: 'https://yello.solar/errors/not-found',
+    INTERNAL: 'https://yello.solar/errors/internal',
+    UNAUTHORIZED: 'https://yello.solar/errors/unauthorized',
+    FORBIDDEN: 'https://yello.solar/errors/forbidden',
+    CONFLICT: 'https://yello.solar/errors/conflict',
+    RATE_LIMIT: 'https://yello.solar/errors/rate-limit',
 } as const;
