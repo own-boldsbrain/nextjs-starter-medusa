@@ -113,6 +113,7 @@ YSH_storefront/src/lib/design-system/
 - Focus ring (Vercel Geist style)
 
 **Uso:**
+
 ```tsx
 import { Button } from '@/lib/design-system/components';
 
