@@ -66,6 +66,36 @@ export function problemJson(
 }
 
 /**
+ * Creates a ProblemDetails object (helper for programmatic error creation)
+ * 
+ * @param params Problem details parameters
+ * @returns ProblemDetails object
+ */
+export function createProblemDetails(params: {
+    type: string;
+    title: string;
+    status: number;
+    detail?: string;
+    instance?: string;
+    errors?: Array<{ path?: string; message: string;[key: string]: unknown }>;
+    [key: string]: unknown;
+}): ProblemDetails {
+    return {
+        type: params.type,
+        title: params.title,
+        status: params.status,
+        detail: params.detail,
+        instance: params.instance,
+        errors: params.errors,
+        ...Object.fromEntries(
+            Object.entries(params).filter(
+                ([key]) => !['type', 'title', 'status', 'detail', 'instance', 'errors'].includes(key)
+            )
+        ),
+    };
+}
+
+/**
  * Common problem types for Yello Solar Hub
  */
 export const ProblemTypes = {
