@@ -6,9 +6,9 @@ import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 
 export const metadata: Metadata = {
-  title: "Medusa Next.js Starter Template",
+  title: "Yello Solar Hub - Energia Solar Inteligente",
   description:
-    "A performant frontend ecommerce starter template with Next.js 15 and Medusa.",
+    "Plataforma enterprise para dimensionamento, simulação e gestão de sistemas de energia solar fotovoltaica. TIER classification, HSP regions, sizing AI integrado.",
 }
 
 export default async function Home(props: {
