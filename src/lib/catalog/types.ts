@@ -278,12 +278,11 @@ export interface MedusaProductMetadata {
     use_cases?: string[];
 }
 
-export interface CatalogProduct extends SolarPanel | Inverter | Accessory {
-    // Unified type for all catalog products
-    equipment_type: 'panel' | 'inverter' | 'accessory';
-}
-
-// ========================================
+// Unified type for all catalog products (discriminated union)
+export type CatalogProduct =
+    | (SolarPanel & { equipment_type: 'panel' })
+    | (Inverter & { equipment_type: 'inverter' })
+    | (Accessory & { equipment_type: 'accessory' });// ========================================
 // Scraper Types
 // ========================================
 
@@ -319,19 +318,17 @@ export interface ScraperResult {
 // Helper Functions
 // ========================================
 
-export function isSolarPanel(product: CatalogProduct): product is SolarPanel {
-    return 'equipment_type' in product && product.equipment_type === 'panel';
+export function isSolarPanel(product: CatalogProduct): product is SolarPanel & { equipment_type: 'panel' } {
+    return product.equipment_type === 'panel';
 }
 
-export function isInverter(product: CatalogProduct): product is Inverter {
-    return 'equipment_type' in product && product.equipment_type === 'inverter';
+export function isInverter(product: CatalogProduct): product is Inverter & { equipment_type: 'inverter' } {
+    return product.equipment_type === 'inverter';
 }
 
-export function isAccessory(product: CatalogProduct): product is Accessory {
-    return 'equipment_type' in product && product.equipment_type === 'accessory';
-}
-
-export function getTierLabel(tier: TierLevel): string {
+export function isAccessory(product: CatalogProduct): product is Accessory & { equipment_type: 'accessory' } {
+    return product.equipment_type === 'accessory';
+} export function getTierLabel(tier: TierLevel): string {
     const labels: Record<TierLevel, string> = {
         XPP: 'Extra Pequeno Porte',
         PP: 'Pequeno Porte',
