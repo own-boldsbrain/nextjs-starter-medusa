@@ -31,7 +31,7 @@ const inputVariants = cva({
 
 interface InputProps
   extends VariantProps<typeof inputVariants>,
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {}
+  Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> { }
 
 /**
  * This component is based on the `input` element and supports all of its props
@@ -81,6 +81,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               }
             )}
             role="img"
+            aria-label="Search"
           >
             <MagnifyingGlassMini />
           </div>

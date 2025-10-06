@@ -11,7 +11,12 @@ export * from './colors';
 export * from './typography';
 export * from './spacing';
 
+// Components
+export * from './components/Button';
+export * from './components/Card';
+export * from './components/Input';
+
 // Re-export for convenience
-export { yelloBrand, geist, semantic, cssVars } from './colors';
+export { yello, geist, semantic, cssVars, medusaYelloTokens } from './colors';
 export { fontFamilies, fontSizes, fontWeights, typographyPresets } from './typography';
 export { spacing, containerMaxWidths, borderRadius, shadows, elevations } from './spacing';

@@ -9,7 +9,7 @@
 ## 📋 Índice
 
 1. [Visão Geral](#-visão-geral)
-2. [Arquitetura](#-arquitetura)
+2. [Arquitetura](#arquitetura)
 3. [Camadas de Integração](#-camadas-de-integração)
 4. [Mapeamentos Slug ↔ ID](#%EF%B8%8F-mapeamentos-slug--id)
 5. [DTOs e Normalização](#-dtos-e-normalização)
@@ -307,12 +307,14 @@ formatPrice(5000, 'USD'); // → "$50.00"
 ### GET /api/storefront/categories
 
 **Query Params**:
+
 - `limit` (1-100, default 20)
 - `offset` (default 0)
 - `parent` (category ID/handle)
 - `q` (busca)
 
 **Response** (200):
+
 ```json
 {
   "data": [
@@ -334,6 +336,7 @@ formatPrice(5000, 'USD'); // → "$50.00"
 ```
 
 **Headers**:
+
 - `Cache-Control: public, max-age=60, stale-while-revalidate=600`
 - `ETag: "abc123"`
 - `X-Total-Count: 14`
@@ -344,6 +347,7 @@ formatPrice(5000, 'USD'); // → "$50.00"
 ### GET /api/storefront/products
 
 **Query Params**:
+
 - `category` (slug ou ID, ex: `paineis-solares`)
 - `q` (busca)
 - `sort` (created_at, -created_at, etc.)
@@ -351,12 +355,14 @@ formatPrice(5000, 'USD'); // → "$50.00"
 - `offset` (default 0)
 
 **Tradução automática**:
+
 ```
 GET /api/storefront/products?category=paineis-solares
 → Medusa: GET /store/products?category_id=cat_paineis_solares
 ```
 
 **Response** (200):
+
 ```json
 {
   "data": [
@@ -390,9 +396,11 @@ GET /api/storefront/products?category=paineis-solares
 ### GET /api/storefront/products/[handle]
 
 **Params**:
+
 - `handle` (path param, ex: `painel-solar-550w-mono`)
 
 **Response** (200):
+
 ```json
 {
   "data": {
@@ -420,9 +428,11 @@ GET /api/storefront/products?category=paineis-solares
 ```
 
 **Headers**:
+
 - `Cache-Control: public, max-age=120, stale-while-revalidate=600` (maior que listagens)
 
 **Error** (404):
+
 ```json
 {
   "type": "https://yello.solar/errors/not-found",
@@ -438,12 +448,15 @@ GET /api/storefront/products?category=paineis-solares
 ### GET /api/storefront/kits/[slug]
 
 **Params**:
+
 - `slug` (on-grid | off-grid-interativo | zero-grid | hibrido | antiapagao)
 
 **Query Params**:
+
 - `limit`, `offset` (paginação)
 
 **Response** (200):
+
 ```json
 {
   "data": [/* ProductSummary[] */],
@@ -460,6 +473,7 @@ GET /api/storefront/products?category=paineis-solares
 ```
 
 **Error** (404):
+
 ```json
 {
   "type": "https://yello.solar/errors/not-found",
@@ -475,11 +489,13 @@ GET /api/storefront/products?category=paineis-solares
 ### POST /api/storefront/cart
 
 **Body** (JSON):
+
 ```json
 {}  // vazio para criar carrinho novo
 ```
 
 **Response** (201):
+
 ```json
 {
   "data": {
@@ -497,6 +513,7 @@ GET /api/storefront/products?category=paineis-solares
 ### POST /api/storefront/cart/[id]/line-items
 
 **Body** (JSON):
+
 ```json
 {
   "variant_id": "variant_01XYZ...",
@@ -505,6 +522,7 @@ GET /api/storefront/products?category=paineis-solares
 ```
 
 **Response** (200):
+
 ```json
 {
   "data": {
@@ -529,6 +547,7 @@ GET /api/storefront/products?category=paineis-solares
 ```
 
 **Error** (400):
+
 ```json
 {
   "type": "https://yello.solar/errors/validation",
@@ -552,6 +571,7 @@ GET /api/storefront/products?category=paineis-solares
 Aguardando configuração de payment provider (Stripe/PayPal) no Medusa backend.
 
 **Response** (501):
+
 ```json
 {
   "type": "https://yello.solar/errors/not-implemented",

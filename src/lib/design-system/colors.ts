@@ -5,7 +5,7 @@
  * Brand Gradient: #FFEE00 (0%) → #FF6600 (34%) → #FF0066 (50%)
  */
 
-export const yelloBrand = {
+export const yello = {
     // Primary Brand Colors (Gradient)
     yellow: '#FFEE00',
     orange: '#FF6600',
@@ -80,26 +80,26 @@ export const geist = {
     error500: '#EE0000',
 
     // Warning (Yellow-Orange from Yello blend)
-    warning: yelloBrand.orange,
-    warning50: yelloBrand.orange50,
-    warning500: yelloBrand.orange500,
+    warning: yello.orange,
+    warning50: yello.orange50,
+    warning500: yello.orange500,
 } as const;
 
 export const semantic = {
     // Primary Actions (Yello Yellow)
-    primary: yelloBrand.yellow,
-    primaryHover: yelloBrand.yellow400,
-    primaryActive: yelloBrand.yellow500,
+    primary: yello.yellow,
+    primaryHover: yello.yellow400,
+    primaryActive: yello.yellow500,
 
     // Secondary Actions (Yello Orange)
-    secondary: yelloBrand.orange,
-    secondaryHover: yelloBrand.orange400,
-    secondaryActive: yelloBrand.orange500,
+    secondary: yello.orange,
+    secondaryHover: yello.orange400,
+    secondaryActive: yello.orange500,
 
     // Tertiary Actions (Yello Magenta)
-    tertiary: yelloBrand.magenta,
-    tertiaryHover: yelloBrand.magenta400,
-    tertiaryActive: yelloBrand.magenta500,
+    tertiary: yello.magenta,
+    tertiaryHover: yello.magenta400,
+    tertiaryActive: yello.magenta500,
 
     // Status Colors
     success: geist.success,
@@ -124,9 +124,9 @@ export const semantic = {
 
 // CSS Variables for Tailwind
 export const cssVars = {
-    '--yello-yellow': yelloBrand.yellow,
-    '--yello-orange': yelloBrand.orange,
-    '--yello-magenta': yelloBrand.magenta,
+    '--yello-yellow': yello.yellow,
+    '--yello-orange': yello.orange,
+    '--yello-magenta': yello.magenta,
 
     '--geist-background': geist.background,
     '--geist-foreground': geist.foreground,
@@ -137,6 +137,38 @@ export const cssVars = {
     '--tertiary': semantic.tertiary,
 } as const;
 
-export type YelloBrandColor = keyof typeof yelloBrand;
+export type YelloBrandColor = keyof typeof yello;
 export type GeistColor = keyof typeof geist;
 export type SemanticColor = keyof typeof semantic;
+
+/**
+ * Medusa UI Token Overrides - Yello Solar Brand Integration
+ * Maps Yello colors to Medusa UI CSS variables for seamless integration
+ */
+export const medusaYelloTokens = {
+    // Button variants mapping to Yello colors
+    '--button-primary': yello.yellow,
+    '--button-primary-hover': yello.yellow400,
+    '--button-primary-pressed': yello.yellow500,
+
+    '--button-secondary': yello.orange,
+    '--button-secondary-hover': yello.orange400,
+    '--button-secondary-pressed': yello.orange500,
+
+    '--button-tertiary': yello.magenta,
+    '--button-tertiary-hover': yello.magenta400,
+    '--button-tertiary-pressed': yello.magenta500,
+
+    // Interactive elements
+    '--bg-interactive': yello.orange,
+    '--bg-interactive-hover': yello.orange400,
+    '--border-interactive': yello.magenta,
+    '--border-interactive-hover': yello.magenta400,
+
+    // Focus states
+    '--border-focus': yello.yellow,
+    '--shadow-focus': `0 0 0 2px ${yello.yellow}20`,
+
+    // Brand gradient
+    '--gradient-yello': `linear-gradient(135deg, ${yello.yellow} 0%, ${yello.orange} 50%, ${yello.magenta} 100%)`,
+} as const;

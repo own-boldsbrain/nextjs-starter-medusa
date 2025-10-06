@@ -1,10 +1,39 @@
+@import "@medusajs/ui-preset";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Yello Brand Colors */
+    /* Medusa UI Base Tokens */
+    @apply light;
+    
+    /* Yello Solar Hub Overrides */
+    --button-primary: #FFCE00;
+    --button-primary-hover: #FFB800;
+    --button-primary-pressed: #FFCE00;
+    
+    --button-secondary: #FF6600;
+    --button-secondary-hover: #E65C00;
+    --button-secondary-pressed: #FF6600;
+    
+    --button-tertiary: #FF0066;
+    --button-tertiary-hover: #E60059;
+    --button-tertiary-pressed: #FF0066;
+    
+    --bg-interactive: #FF6600;
+    --bg-interactive-hover: #E65C00;
+    --border-interactive: #FF0066;
+    --border-interactive-hover: #E60059;
+    
+    --border-focus: #FFCE00;
+    --shadow-focus: 0 0 0 2px rgba(255, 206, 0, 0.2);
+    
+    /* Brand gradient */
+    --gradient-yello: linear-gradient(135deg, #FFCE00 0%, #FF6600 50%, #FF0066 100%);
+    
+    /* Legacy Yello Brand Colors */
     --yello-yellow: #ffce00;
     --yello-orange: #ff6600;
     --yello-magenta: #ff0066;
