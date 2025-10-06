@@ -15,6 +15,8 @@ export * from './spacing';
 export * from './components/Button';
 export * from './components/Card';
 export * from './components/Input';
+export * from './components/Badge';
+export * from './components/PanelCard';
 
 // Re-export for convenience
 export { yello, geist, semantic, cssVars, medusaYelloTokens } from './colors';
