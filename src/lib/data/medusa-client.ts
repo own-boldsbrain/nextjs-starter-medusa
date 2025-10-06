@@ -1,88 +1,142 @@
 /**
- * Medusa Client — REST API Wrapper
+ * Storefront Data Layer
+ *
+ * Consome as rotas internas `/api/storefront/*` responsáveis por
+ * orquestrar e normalizar os dados do Medusa Store API. Mantemos
+ * todo o fetching no servidor com suporte a ISR, cache HTTP e erros
+ * padronizados (RFC 9457) expostos pela camada de proxy.
  */
 
-const MEDUSA_BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localhost:9000';
+import type {
+    CategorySummary,
+    ProductDetail,
+    ProductSummary,
+} from '@/lib/integration/dto';
 
-export type MedusaCategory = {
-    id: string;
-    name: string;
-    handle: string;
-    parent_category_id?: string | null;
+type NextFetchOptions = RequestInit & {
+    next?: {
+        revalidate?: number;
+    };
 };
 
-export type MedusaProduct = {
-    id: string;
-    title: string;
-    handle: string;
-    description?: string;
-    thumbnail?: string;
-    variants: Array<{
-        id: string;
-        title: string;
-        sku?: string;
-        prices: Array<{
-            currency_code: string;
-            amount: number;
-        }>;
-    }>;
-    categories?: Array<{ id: string }>;
-};
-
-export type MedusaListResponse<T> = {
-    products?: T[];
-    product_categories?: T[];
-    count: number;
-    offset: number;
-    limit: number;
-};
-
-async function fetchMedusa<T>(endpoint: string): Promise<T> {
-    const url = `${MEDUSA_BACKEND_URL}${endpoint}`;
-
-    const res = await fetch(url, {
-        next: { revalidate: 3600 }, // ISR: 1 hour
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-
-    if (!res.ok) {
-        throw new Error(`Medusa API error: ${res.status} ${res.statusText}`);
-    }
-
-    return res.json();
-}
-
-export async function getCategories(): Promise<MedusaCategory[]> {
-    const data = await fetchMedusa<MedusaListResponse<MedusaCategory>>('/store/product-categories');
-    return data.product_categories || [];
-}
-
-export async function getProductsByCategory(
-    categoryId: string,
-    page: number = 0,
-    limit: number = 12
-): Promise<{ products: MedusaProduct[]; count: number }> {
-    const offset = page * limit;
-    const data = await fetchMedusa<MedusaListResponse<MedusaProduct>>(
-        `/store/products?category_id[]=${categoryId}&offset=${offset}&limit=${limit}`
-    );
-
-    return {
-        products: data.products || [],
-        count: data.count || 0,
+interface StorefrontListResponse<T> {
+    data: T[];
+    meta: {
+        total: number;
+        offset: number;
+        limit: number;
     };
 }
 
-export async function getProductByHandle(handle: string): Promise<MedusaProduct | null> {
-    try {
-        const data = await fetchMedusa<MedusaListResponse<MedusaProduct>>(
-            `/store/products?handle=${handle}`
+interface StorefrontDetailResponse<T> {
+    data: T;
+}
+
+const DEFAULT_SITE_URL = (() => {
+    if (process.env.NEXT_PUBLIC_APP_URL) return process.env.NEXT_PUBLIC_APP_URL;
+    if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+    if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+    return 'http://localhost:3000';
+})();
+
+const STOREFRONT_API_BASE =
+    process.env.NEXT_PUBLIC_STOREFRONT_API_BASE || DEFAULT_SITE_URL;
+
+async function fetchStorefront<T>(
+    path: string,
+    init?: NextFetchOptions,
+    revalidate: number = 300
+): Promise<{ body: T; headers: Headers }> {
+    const url = path.startsWith('http') ? path : `${STOREFRONT_API_BASE}${path}`;
+
+    const response = await fetch(url, {
+        ...init,
+        headers: {
+            Accept: 'application/json',
+            ...init?.headers,
+        },
+        next: {
+            ...init?.next,
+            revalidate: init?.next?.revalidate ?? revalidate,
+        },
+    });
+
+    if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(
+            `[Storefront API] ${response.status} ${response.statusText}: ${detail}`
         );
-        return data.products?.[0] || null;
+    }
+
+    const body = (await response.json()) as T;
+    return { body, headers: response.headers };
+}
+
+export async function getCategories({
+    limit = 100,
+    offset = 0,
+}: {
+    limit?: number;
+    offset?: number;
+} = {}): Promise<{ categories: CategorySummary[]; total: number }> {
+    const search = new URLSearchParams({
+        limit: String(limit),
+        offset: String(offset),
+    });
+
+    const { body } = await fetchStorefront<StorefrontListResponse<CategorySummary>>(
+        `/api/storefront/categories?${search.toString()}`,
+        undefined,
+        3600
+    );
+
+    return {
+        categories: body.data,
+        total: body.meta.total,
+    };
+}
+
+export async function getProductsByCategory(
+    category: string,
+    page: number = 0,
+    limit: number = 12
+): Promise<{ products: ProductSummary[]; count: number }> {
+    const offset = page * limit;
+    const search = new URLSearchParams({
+        limit: String(limit),
+        offset: String(offset),
+    });
+
+    // category pode ser slug (ex: "paineis-solares") ou ID (cat_*)
+    if (category) {
+        search.set('category', category);
+    }
+
+    const { body } = await fetchStorefront<StorefrontListResponse<ProductSummary>>(
+        `/api/storefront/products?${search.toString()}`,
+        undefined,
+        300
+    );
+
+    return {
+        products: body.data,
+        count: body.meta.total,
+    };
+}
+
+export async function getProductByHandle(handle: string): Promise<ProductDetail | null> {
+    if (!handle) return null;
+
+    try {
+        const { body } = await fetchStorefront<StorefrontDetailResponse<ProductDetail>>(
+            `/api/storefront/products/${handle}`,
+            undefined,
+            600
+        );
+
+        return body.data;
     } catch (error) {
-        console.error(`Error fetching product ${handle}:`, error);
+        console.error(`[Storefront] Error fetching product ${handle}:`, error);
         return null;
     }
 }

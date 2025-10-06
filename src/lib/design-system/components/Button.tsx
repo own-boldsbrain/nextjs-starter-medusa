@@ -10,7 +10,9 @@
  * - outline: Gray outline - Neutral actions
  */
 
-import { forwardRef, ButtonHTMLAttributes } from 'react';
+"use client"
+
+import React, { forwardRef, useMemo, ButtonHTMLAttributes } from 'react';
 import { Button as MedusaButton } from '@medusajs/ui';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
@@ -50,33 +52,37 @@ export interface ButtonProps
   loading?: boolean;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, yelloVariant = 'primary', size, fullWidth, loading, children, disabled, ...props }, ref) => {
-    // Map Yello variants to Medusa variants for base functionality
-    const medusaVariantMap: Record<NonNullable<typeof yelloVariant>, 'primary' | 'secondary' | 'danger' | 'transparent'> = {
-      primary: 'primary',
-      secondary: 'secondary',
-      tertiary: 'danger', // Reuse danger for magenta
-      ghost: 'transparent',
-      outline: 'secondary',
-    };
+const MEDUSA_VARIANT_MAP = {
+  primary: 'primary',
+  secondary: 'secondary',
+  tertiary: 'danger', // Reuse danger for magenta
+  ghost: 'transparent',
+  outline: 'secondary',
+} as const;
 
-    const medusaVariant = medusaVariantMap[yelloVariant!];
+const ButtonInner = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, yelloVariant = 'primary', size, fullWidth, loading, children, disabled, ...props }, ref) => {
+    const medusaVariant = MEDUSA_VARIANT_MAP[yelloVariant! as keyof typeof MEDUSA_VARIANT_MAP];
+
+    const combinedClassName = useMemo(
+      () =>
+        cn(
+          yelloButtonVariants({ yelloVariant, size, fullWidth }),
+          // Override Medusa styles with Yello colors
+          (yelloVariant === 'primary' || yelloVariant === 'secondary' || yelloVariant === 'tertiary') &&
+          'shadow-sm focus-visible:ring-[var(--border-focus)]',
+          className
+        ),
+      [yelloVariant, size, fullWidth, className]
+    );
 
     return (
       <MedusaButton
         ref={ref}
         variant={medusaVariant}
-        className={cn(
-          yelloButtonVariants({ yelloVariant, size, fullWidth }),
-          // Override Medusa styles with Yello colors
-          yelloVariant === 'primary' && 'shadow-sm focus-visible:ring-[var(--border-focus)]',
-          yelloVariant === 'secondary' && 'shadow-sm focus-visible:ring-[var(--border-focus)]',
-          yelloVariant === 'tertiary' && 'shadow-sm focus-visible:ring-[var(--border-focus)]',
-          className
-        )}
+        className={combinedClassName}
         disabled={disabled || loading}
-        aria-busy={loading}
+        aria-busy={loading ? 'true' : undefined}
         {...props}
       >
         {loading && (
@@ -85,6 +91,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
+            aria-hidden
           >
             <circle
               className="opacity-25"
@@ -107,6 +114,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
+const Button = React.memo(ButtonInner);
 Button.displayName = 'Button';
 
 export { Button, yelloButtonVariants };

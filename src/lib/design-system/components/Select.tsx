@@ -71,20 +71,35 @@ return (const Select = forwardRef<HTMLSelectElement, SelectProps>(
     { ...props }          className
 
     >        )}
+import React from 'react';
+import { Select as MedusaSelect } from '@medusajs/ui';
+import { cn } from '@/lib/utils';
 
-{ children } {...props }
+type MedusaSelectProps = React.ComponentPropsWithoutRef<typeof MedusaSelect>;
 
-    </MedusaSelect >      >
+export interface SelectProps extends Omit<MedusaSelectProps, 'size'> {
+    size?: 'base' | 'small'
+}
 
-  ); { children }
+const SelectInner = React.forwardRef<any, SelectProps>(({ size = 'base', className, children, ...props }, ref) => {
+    const sizeClasses = size === 'base' ? 'h-8' : 'h-7';
 
-};      </MedusaSelect >
-
+    return (
+        <MedusaSelect
+            ref={ref}
+            className={cn(
+                sizeClasses,
+                'focus-visible:border-[var(--border-interactive)] focus-visible:ring-[var(--shadow-focus)]',
+                className
+            )}
+            {...props}
+        >
+            {children}
+        </MedusaSelect>
     );
+});
 
-Select.displayName = 'Select';  }
+const Select = React.memo(SelectInner);
+Select.displayName = 'Select';
 
-); Select.displayName = 'Select';
-
-export { Select };
 export { Select };

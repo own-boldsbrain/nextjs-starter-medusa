@@ -7,15 +7,14 @@ import Link from 'next/link';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { formatPrice } from '@/lib/utils';
-import { MedusaProduct } from '@/lib/data/medusa-client';
+import type { ProductSummary } from '@/lib/integration/dto';
 
 interface ProductCardProps {
-    product: MedusaProduct;
+    product: ProductSummary;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-    const variant = product.variants?.[0];
-    const price = variant?.prices?.[0];
+    const formattedPrice = formatPrice(product.price, true);
 
     return (
         <Card className="group hover:shadow-yello transition-shadow duration-300">
@@ -37,17 +36,13 @@ export function ProductCard({ product }: ProductCardProps) {
             </CardHeader>
 
             <CardContent>
-                {variant?.sku && (
-                    <p className="text-xs text-geist-400 mb-2">SKU: {variant.sku}</p>
+                {product.sku && (
+                    <p className="text-xs text-geist-400 mb-2">SKU: {product.sku}</p>
                 )}
             </CardContent>
 
             <CardFooter className="flex justify-between items-center">
-                {price && (
-                    <span className="text-xl font-bold text-yello-orange">
-                        {formatPrice(price.amount, price.currency_code.toUpperCase())}
-                    </span>
-                )}
+                <span className="text-xl font-bold text-yello-orange">{formattedPrice}</span>
                 <Link href={`/produtos/${product.handle}`}>
                     <Button variant="primary" size="sm">Ver detalhes</Button>
                 </Link>
