@@ -3,7 +3,7 @@
  * Based on Medusa UI with Yello Solar brand customization
  */
 
-import { forwardRef, InputHTMLAttributes } from 'react';
+import React, { forwardRef } from 'react';
 import { Input as MedusaInput } from '@medusajs/ui';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
@@ -21,10 +21,10 @@ const yelloInputVariants = cva('', {
 });
 
 export interface InputProps
-    extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>,
+    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
     VariantProps<typeof yelloInputVariants> { }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+const InputInner = forwardRef<HTMLInputElement, InputProps>(
     ({ className, size, ...props }, ref) => {
         return (
             <MedusaInput
@@ -41,6 +41,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     }
 );
 
+const Input = React.memo(InputInner) as unknown as typeof InputInner;
 Input.displayName = 'Input';
 
 export { Input };

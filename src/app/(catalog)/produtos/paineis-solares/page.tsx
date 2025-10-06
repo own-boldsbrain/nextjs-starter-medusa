@@ -4,7 +4,7 @@ import { ProductCard } from '@/components/product/ProductCard';
 export const revalidate = 3600;
 
 export default async function PaineisSolaresPage() {
-    const { products, count } = await getProductsByCategory('cat_paineis_solares');
+    const { products, count } = await getProductsByCategory('paineis-solares');
 
     return (
         <div className="container mx-auto px-4 py-12">

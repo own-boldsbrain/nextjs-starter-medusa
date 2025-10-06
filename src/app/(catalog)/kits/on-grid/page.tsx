@@ -4,7 +4,7 @@ import { ProductCard } from '@/components/product/ProductCard';
 export const revalidate = 3600; // ISR: 1 hour
 
 export default async function KitOnGridPage() {
-    const { products, count } = await getProductsByCategory('cat_kit_on_grid');
+    const { products, count } = await getProductsByCategory('on-grid');
 
     return (
         <div className="container mx-auto px-4 py-12">

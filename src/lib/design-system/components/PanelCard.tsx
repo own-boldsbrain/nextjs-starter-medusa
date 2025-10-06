@@ -1,8 +1,12 @@
+"use client"
+
 /**
  * Yello Solar Hub - PanelCard Component
  * Domain-specific component for solar panel products
  */
 
+import React, { useCallback, useMemo } from 'react';
+import Image from 'next/image';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Badge, Button } from '@/lib/design-system/components';
 import { formatPrice } from '@/lib/utils';
 
@@ -30,25 +34,14 @@ const tierColors = {
     G: 'bg-orange-100 text-orange-700 border-orange-300',
 };
 
-export const PanelCard: React.FC<PanelCardProps> = ({
-    panel,
-    onViewDetails,
-    onAddToQuote
-}) => {
-    const handleViewDetails = () => {
-        onViewDetails?.(panel.id);
-    };
+const PanelCardInner: React.FC<PanelCardProps> = ({ panel, onViewDetails, onAddToQuote }) => {
+    const handleViewDetails = useCallback(() => onViewDetails?.(panel.id), [onViewDetails, panel.id]);
+    const handleAddToQuote = useCallback(() => onAddToQuote?.(panel.id), [onAddToQuote, panel.id]);
 
-    const handleAddToQuote = () => {
-        onAddToQuote?.(panel.id);
-    };
+    const formattedPrice = useMemo(() => formatPrice(panel.price), [panel.price]);
 
     return (
-        <Card
-            variant="default"
-            interactive
-            className="hover:shadow-yello transition-all duration-200 group"
-        >
+        <Card variant="default" interactive className="hover:shadow-yello transition-all duration-200 group">
             <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -70,11 +63,13 @@ export const PanelCard: React.FC<PanelCardProps> = ({
 
             <CardContent className="space-y-4">
                 {panel.image && (
-                    <div className="aspect-video bg-gradient-yello rounded-lg overflow-hidden">
-                        <img
+                    <div className="relative aspect-video bg-gradient-yello rounded-lg overflow-hidden">
+                        <Image
                             src={panel.image}
                             alt={`${panel.manufacturer} ${panel.model}`}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-200"
+                            sizes="(max-width: 640px) 100vw, 50vw"
                         />
                     </div>
                 )}
@@ -93,24 +88,14 @@ export const PanelCard: React.FC<PanelCardProps> = ({
 
             <CardFooter className="flex items-center justify-between pt-4 border-t border-geist-200">
                 <div className="text-left">
-                    <p className="text-2xl font-bold text-gradient-yello">
-                        {formatPrice(panel.price)}
-                    </p>
+                    <p className="text-2xl font-bold text-gradient-yello">{formattedPrice}</p>
                     <p className="text-xs text-geist-500">por unidade</p>
                 </div>
                 <div className="flex gap-2">
-                    <Button
-                        yelloVariant="outline"
-                        size="sm"
-                        onClick={handleViewDetails}
-                    >
+                    <Button yelloVariant="outline" size="sm" onClick={handleViewDetails}>
                         Detalhes
                     </Button>
-                    <Button
-                        yelloVariant="primary"
-                        size="sm"
-                        onClick={handleAddToQuote}
-                    >
+                    <Button yelloVariant="primary" size="sm" onClick={handleAddToQuote}>
                         Adicionar
                     </Button>
                 </div>
@@ -118,3 +103,8 @@ export const PanelCard: React.FC<PanelCardProps> = ({
         </Card>
     );
 };
+
+const PanelCard = React.memo(PanelCardInner);
+PanelCard.displayName = 'PanelCard';
+
+export { PanelCard };
