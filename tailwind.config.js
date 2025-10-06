@@ -21,6 +21,43 @@ module.exports = {
         padding: "padding-top padding-right padding-bottom padding-left",
       },
       colors: {
+        // Yello Solar Hub Brand Colors (Gradient: #FFEE00 -> #FF6600 -> #FF0066)
+        yello: {
+          yellow: '#FFEE00',
+          orange: '#FF6600',
+          magenta: '#FF0066',
+          yellow50: '#FFFEF5',
+          yellow100: '#FFFCE6',
+          yellow200: '#FFF9CC',
+          yellow300: '#FFF399',
+          yellow400: '#FFEE66',
+          yellow500: '#FFEE00',
+          orange50: '#FFF7F0',
+          orange100: '#FFE6CC',
+          orange200: '#FFD199',
+          orange300: '#FFB366',
+          orange400: '#FF8933',
+          orange500: '#FF6600',
+          magenta50: '#FFF0F5',
+          magenta100: '#FFCCE0',
+          magenta200: '#FF99C2',
+          magenta300: '#FF66A3',
+          magenta400: '#FF3385',
+          magenta500: '#FF0066',
+        },
+        // Vercel Geist Gray Scale
+        geist: {
+          50: '#FAFAFA',
+          100: '#F5F5F5',
+          200: '#E5E5E5',
+          300: '#D4D4D4',
+          400: '#A3A3A3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
+        },
         grey: {
           0: "#FFFFFF",
           5: "#F9FAFB",
@@ -60,6 +97,7 @@ module.exports = {
       },
       fontFamily: {
         sans: [
+          "var(--font-geist-sans)",
           "Inter",
           "-apple-system",
           "BlinkMacSystemFont",
@@ -68,6 +106,13 @@ module.exports = {
           "Helvetica Neue",
           "Ubuntu",
           "sans-serif",
+        ],
+        mono: [
+          "var(--font-geist-mono)",
+          "Menlo",
+          "Monaco",
+          "Courier New",
+          "monospace",
         ],
       },
       keyframes: {
