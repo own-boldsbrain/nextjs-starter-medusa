@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Yello Brand Colors */
+    --yello-yellow: #ffce00;
+    --yello-orange: #ff6600;
+    --yello-magenta: #ff0066;
+    
+    /* Geist Grays */
+    --geist-bg: #ffffff;
+    --geist-fg: #171717;
+    
+    /* Semantic */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 45 100% 50%; /* Yello Yellow */
+    --primary-foreground: 0 0% 9%;
+    --secondary: 24 100% 50%; /* Yello Orange */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 343 100% 50%; /* Yello Magenta */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 45 100% 50%;
+    --radius: 0.5rem;
+  }
+  
+  .dark {
+    --background: 0 0% 9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 45 100% 50%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 24 100% 50%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 343 100% 50%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 45 100% 50%;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-yello {
+    background: linear-gradient(135deg, var(--yello-yellow) 0%, var(--yello-orange) 50%, var(--yello-magenta) 100%);
+  }
+  
+  .text-gradient-yello {
+    background: linear-gradient(135deg, var(--yello-yellow) 0%, var(--yello-orange) 50%, var(--yello-magenta) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .shadow-yello {
+    box-shadow: 0 4px 20px rgba(255, 206, 0, 0.3);
+  }
+}
