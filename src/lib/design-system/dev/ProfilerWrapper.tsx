@@ -150,15 +150,14 @@ export const ProfilerWrapper: React.FC<ProfilerWrapperProps> = ({
 }) => {
     const renderCountRef = useRef(0)
 
-    const handleRender = useCallback<React.ProfilerOnRenderCallback>(
+    const handleRender = useCallback(
         (
             profileId: string,
             phase: 'mount' | 'update' | 'nested-update',
             actualDuration: number,
             baseDuration: number,
             startTime: number,
-            commitTime: number,
-            interactions: Set<unknown>
+            commitTime: number
         ) => {
             renderCountRef.current += 1
 
@@ -169,7 +168,7 @@ export const ProfilerWrapper: React.FC<ProfilerWrapperProps> = ({
                 baseDuration,
                 startTime,
                 commitTime,
-                interactions,
+                interactions: new Set(),
             }
 
             // Aggregate statistics

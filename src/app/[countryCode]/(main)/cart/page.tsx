@@ -3,6 +3,7 @@ import { retrieveCustomer } from "@lib/data/customer"
 import CartTemplate from "@modules/cart/templates"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { ProfilerWrapper } from "@/lib/design-system/dev"
 
 export const metadata: Metadata = {
   title: "Cart",
@@ -17,5 +18,9 @@ export default async function Cart() {
 
   const customer = await retrieveCustomer()
 
-  return <CartTemplate cart={cart} customer={customer} />
+  return (
+    <ProfilerWrapper id="CartPage">
+      <CartTemplate cart={cart} customer={customer} />
+    </ProfilerWrapper>
+  )
 }
