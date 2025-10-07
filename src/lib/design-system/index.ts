@@ -19,6 +19,7 @@ export * from './components/Badge';
 export * from './components/PanelCard';
 export * from './components/Spinner';
 export * from './components/ErrorMessage';
+export * from './components/Typography';
 
 // Re-export for convenience
 export { yello, geist, semantic, cssVars, medusaYelloTokens } from './colors';

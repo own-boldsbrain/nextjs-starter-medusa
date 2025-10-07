@@ -19,9 +19,9 @@ export function MainNav() {
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
 
   return (
-    <nav className="hidden lg:flex items-center gap-6" aria-label="Navegação principal">
+    <nav className="hidden lg:flex items-center gap-6" aria-label="Navegação principal" data-testid="main-nav">
       {/* Logo */}
-      <LocalizedClientLink href="/" className="flex items-center gap-2">
+      <LocalizedClientLink href="/" className="flex items-center gap-2" data-testid="nav-logo-link">
         <YelloLogo size={40} />
         <span className="text-lg font-bold bg-gradient-to-r from-yello-yellow via-yello-orange to-yello-magenta bg-clip-text text-transparent">
           Yello Solar Hub
@@ -35,8 +35,9 @@ export function MainNav() {
           className="relative"
           onMouseEnter={() => setActiveMegaMenu("equipamentos")}
           onMouseLeave={() => setActiveMegaMenu(null)}
+          data-testid="nav-equipamentos-container"
         >
-          <Button yelloVariant="ghost" size="sm" className="font-medium">
+          <Button yelloVariant="ghost" size="sm" className="font-medium" data-testid="nav-equipamentos-button">
             Equipamentos
             <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -45,7 +46,7 @@ export function MainNav() {
 
           {/* Mega Menu Dropdown */}
           {activeMegaMenu === "equipamentos" && (
-            <div className="absolute top-full left-0 mt-2 w-screen max-w-4xl z-50 animate-fade-in-top">
+            <div className="absolute top-full left-0 mt-2 w-screen max-w-4xl z-50 animate-fade-in-top" data-testid="nav-equipamentos-megamenu">
               <Card elevation="floating" className="shadow-2xl">
                 <CardContent className="p-6">
                   <div className="grid grid-cols-3 gap-6">
