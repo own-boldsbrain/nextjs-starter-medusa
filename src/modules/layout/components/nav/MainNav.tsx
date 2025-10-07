@@ -36,7 +36,7 @@ export function MainNav() {
           onMouseEnter={() => setActiveMegaMenu("equipamentos")}
           onMouseLeave={() => setActiveMegaMenu(null)}
         >
-          <Button variant="ghost" size="sm" className="font-medium">
+          <Button yelloVariant="ghost" size="sm" className="font-medium">
             Equipamentos
             <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -122,7 +122,7 @@ export function MainNav() {
                       Não sabe qual sistema escolher?
                     </p>
                     <LocalizedClientLink href="/sizing">
-                      <Button variant="primary" size="sm">
+                      <Button yelloVariant="primary" size="sm">
                         Dimensionar Sistema
                       </Button>
                     </LocalizedClientLink>
@@ -139,7 +139,7 @@ export function MainNav() {
           onMouseEnter={() => setActiveMegaMenu("journeys")}
           onMouseLeave={() => setActiveMegaMenu(null)}
         >
-          <Button variant="ghost" size="sm" className="font-medium">
+          <Button yelloVariant="ghost" size="sm" className="font-medium">
             Jornadas
             <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -180,7 +180,7 @@ export function MainNav() {
                       Explore as jornadas regulatórias e conecte cada etapa ao catálogo 360º.
                     </p>
                     <LocalizedClientLink href="/journeys">
-                      <Button variant="primary" size="sm">
+                      <Button yelloVariant="primary" size="sm">
                         Ver Buyer Journey 360º
                       </Button>
                     </LocalizedClientLink>
@@ -193,19 +193,19 @@ export function MainNav() {
 
         {/* Outros links */}
         <LocalizedClientLink href="/store">
-          <Button variant="ghost" size="sm">
+          <Button yelloVariant="ghost" size="sm">
             Todos os Produtos
           </Button>
         </LocalizedClientLink>
 
         <LocalizedClientLink href="/sizing">
-          <Button variant="outline" size="sm">
+          <Button yelloVariant="outline" size="sm">
             Dimensionamento
           </Button>
         </LocalizedClientLink>
 
         <LocalizedClientLink href="/account">
-          <Button variant="ghost" size="sm">
+          <Button yelloVariant="ghost" size="sm">
             Minha Conta
           </Button>
         </LocalizedClientLink>
