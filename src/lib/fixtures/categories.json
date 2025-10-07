@@ -1,0 +1,284 @@
+{
+  "categories": [
+    {
+      "id": "cat_kit_on_grid",
+      "name": "Kit On-Grid",
+      "description": "Sistema fotovoltaico conectado à rede elétrica. Ideal para reduzir conta de luz com injeção de excedente.",
+      "handle": "kit-on-grid",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "premium",
+        "has_hsp": true,
+        "requires_sizing": true,
+        "seo_title": "Kit Solar On-Grid | Sistema Conectado à Rede | Yello Solar Hub",
+        "seo_description": "Kits solares on-grid completos com painéis TIER 1, inversores e estruturas. Energia solar conectada à rede com ROI em 4-6 anos.",
+        "keywords": [
+          "kit on-grid",
+          "sistema solar conectado",
+          "geração distribuída",
+          "créditos energéticos"
+        ]
+      }
+    },
+    {
+      "id": "cat_kit_off_grid_interativo",
+      "name": "Kit Off-Grid Interativo",
+      "description": "Sistema isolado com baterias para locais sem acesso à rede elétrica. Autonomia energética total.",
+      "handle": "kit-off-grid-interativo",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "premium",
+        "has_hsp": true,
+        "requires_sizing": true,
+        "seo_title": "Kit Solar Off-Grid | Sistema Isolado com Baterias | Yello Solar Hub",
+        "seo_description": "Kits off-grid completos para áreas remotas. Inversores híbridos + baterias de lítio + painéis solares. Autonomia de 3-7 dias.",
+        "keywords": [
+          "kit off-grid",
+          "sistema isolado",
+          "energia autônoma",
+          "baterias solares"
+        ]
+      }
+    },
+    {
+      "id": "cat_kit_zero_grid",
+      "name": "Kit Zero-Grid",
+      "description": "Sistema inteligente para zerar consumo da rede. Medidor Grid Zero + autoconsumo otimizado.",
+      "handle": "kit-zero-grid",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "premium",
+        "has_hsp": true,
+        "requires_sizing": true,
+        "seo_title": "Kit Zero-Grid | Consumo Zero da Rede Elétrica | Yello Solar Hub",
+        "seo_description": "Kits Zero-Grid com medidor inteligente e controle de injeção. Zere sua conta de luz com autoconsumo total.",
+        "keywords": [
+          "kit zero-grid",
+          "consumo zero",
+          "autoconsumo solar",
+          "medidor grid zero"
+        ]
+      }
+    },
+    {
+      "id": "cat_kit_hibrido",
+      "name": "Kit Híbrido",
+      "description": "Sistema híbrido on-grid + baterias. Backup automático e aproveitamento de tarifas.",
+      "handle": "kit-hibrido",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "premium",
+        "has_hsp": true,
+        "requires_sizing": true,
+        "seo_title": "Kit Solar Híbrido | On-Grid + Baterias | Yello Solar Hub",
+        "seo_description": "Kits híbridos com backup automático. Combine geração solar + baterias + rede elétrica para máxima eficiência.",
+        "keywords": [
+          "kit híbrido",
+          "on-grid com baterias",
+          "backup solar",
+          "sistema híbrido"
+        ]
+      }
+    },
+    {
+      "id": "cat_kit_antiapagao",
+      "name": "Kit Antiapagão",
+      "description": "Backup solar automático contra quedas de energia. Comutação em milissegundos.",
+      "handle": "kit-antiapagao",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "standard",
+        "has_hsp": true,
+        "requires_sizing": true,
+        "seo_title": "Kit Antiapagão | Backup Solar Automático | Yello Solar Hub",
+        "seo_description": "Kits antiapagão com inversores híbridos e baterias. Proteção contra quedas de energia com comutação instantânea.",
+        "keywords": [
+          "kit antiapagão",
+          "backup energia",
+          "nobreak solar",
+          "sistema backup"
+        ]
+      }
+    },
+    {
+      "id": "cat_paineis_solares",
+      "name": "Painéis Solares",
+      "description": "Módulos fotovoltaicos TIER 1 de alta eficiência. Tecnologias monocristalina, policristalina e bifacial.",
+      "handle": "paineis-solares",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "premium",
+        "has_hsp": false,
+        "requires_sizing": false,
+        "seo_title": "Painéis Solares TIER 1 | Módulos Fotovoltaicos | Yello Solar Hub",
+        "seo_description": "Painéis solares das melhores marcas: Canadian Solar, JA Solar, Jinko, Trina. Garantia 25 anos. Eficiência até 22%.",
+        "keywords": [
+          "painéis solares",
+          "módulos fotovoltaicos",
+          "placas solares",
+          "tier 1"
+        ]
+      }
+    },
+    {
+      "id": "cat_inversores",
+      "name": "Inversores",
+      "description": "Inversores on-grid, off-grid e híbridos das principais marcas. Eficiência > 97%.",
+      "handle": "inversores",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "premium",
+        "has_hsp": false,
+        "requires_sizing": false,
+        "seo_title": "Inversores Solares | On-Grid, Off-Grid e Híbridos | Yello Solar Hub",
+        "seo_description": "Inversores de marcas líderes: Growatt, Deye, Sofar, Hoymiles. Garantia 10 anos. Monitoramento via app.",
+        "keywords": [
+          "inversores solares",
+          "inversor on-grid",
+          "inversor híbrido",
+          "microinversor"
+        ]
+      }
+    },
+    {
+      "id": "cat_baterias",
+      "name": "Baterias",
+      "description": "Baterias de lítio LiFePO4 e chumbo-ácido para sistemas off-grid e híbridos.",
+      "handle": "baterias",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "premium",
+        "has_hsp": false,
+        "requires_sizing": false,
+        "seo_title": "Baterias Solares | Lítio e Chumbo-Ácido | Yello Solar Hub",
+        "seo_description": "Baterias de lítio LiFePO4 com 6000 ciclos e baterias estacionárias. Garantia até 10 anos.",
+        "keywords": [
+          "baterias solares",
+          "bateria lítio",
+          "lifepo4",
+          "bateria estacionária"
+        ]
+      }
+    },
+    {
+      "id": "cat_carregadores_veiculares",
+      "name": "Carregadores Veiculares",
+      "description": "Wallbox para carros elétricos e híbridos. Carregamento inteligente com energia solar.",
+      "handle": "carregadores-veiculares",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "standard",
+        "has_hsp": false,
+        "requires_sizing": false,
+        "seo_title": "Carregadores Veiculares | Wallbox Solar | Yello Solar Hub",
+        "seo_description": "Wallbox para carros elétricos com integração solar. Carregue seu veículo com energia limpa e gratuita.",
+        "keywords": [
+          "wallbox",
+          "carregador elétrico",
+          "carregador solar",
+          "ev charger"
+        ]
+      }
+    },
+    {
+      "id": "cat_medidor_grid_zero",
+      "name": "Medidor Grid Zero",
+      "description": "Medidor inteligente para zerar consumo da rede. Controle automático de injeção.",
+      "handle": "medidor-grid-zero",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "essential",
+        "has_hsp": false,
+        "requires_sizing": false,
+        "seo_title": "Medidor Grid Zero | Consumo Zero da Rede | Yello Solar Hub",
+        "seo_description": "Medidor inteligente Grid Zero com controle de injeção. Evite injeção de excedente e maximize autoconsumo.",
+        "keywords": [
+          "medidor grid zero",
+          "consumo zero",
+          "controlador injeção",
+          "autoconsumo"
+        ]
+      }
+    },
+    {
+      "id": "cat_string_box",
+      "name": "String Box",
+      "description": "Caixas de proteção CC para strings fotovoltaicas. Fusíveis, DPS e seccionadores.",
+      "handle": "string-box",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "essential",
+        "has_hsp": false,
+        "requires_sizing": false,
+        "seo_title": "String Box | Proteção CC para Painéis Solares | Yello Solar Hub",
+        "seo_description": "String Box com fusíveis, DPS e seccionadores. Proteção completa para strings fotovoltaicas. Normas NBR.",
+        "keywords": [
+          "string box",
+          "proteção cc",
+          "dps solar",
+          "fusíveis fotovoltaicos"
+        ]
+      }
+    },
+    {
+      "id": "cat_estrutura_montagem",
+      "name": "Estrutura de Montagem",
+      "description": "Estruturas metálicas para fixação de painéis. Telhado cerâmico, metálico, fibrocimento e solo.",
+      "handle": "estrutura-de-montagem",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "standard",
+        "has_hsp": false,
+        "requires_sizing": false,
+        "seo_title": "Estruturas de Montagem | Fixação de Painéis Solares | Yello Solar Hub",
+        "seo_description": "Estruturas de alumínio e aço inox para todos os tipos de telhado. Garantia 25 anos contra corrosão.",
+        "keywords": [
+          "estrutura solar",
+          "fixação painéis",
+          "trilho alumínio",
+          "estrutura solo"
+        ]
+      }
+    },
+    {
+      "id": "cat_bomba_agua",
+      "name": "Bomba de Água",
+      "description": "Bombas solares para irrigação, abastecimento e dessalinização. Eficiência energética.",
+      "handle": "bomba-de-agua",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "standard",
+        "has_hsp": true,
+        "requires_sizing": true,
+        "seo_title": "Bombas de Água Solares | Irrigação e Abastecimento | Yello Solar Hub",
+        "seo_description": "Bombas solares para poços, cisternas e irrigação. Economia total de energia elétrica.",
+        "keywords": [
+          "bomba solar",
+          "bomba água solar",
+          "irrigação solar",
+          "bombeamento fotovoltaico"
+        ]
+      }
+    },
+    {
+      "id": "cat_transformador",
+      "name": "Transformador",
+      "description": "Transformadores para sistemas de média tensão e usinas solares. Potências até 2500 kVA.",
+      "handle": "transformador",
+      "is_active": true,
+      "metadata": {
+        "tier_level": "essential",
+        "has_hsp": false,
+        "requires_sizing": false,
+        "seo_title": "Transformadores | Sistemas de Média Tensão | Yello Solar Hub",
+        "seo_description": "Transformadores para conexão em média tensão. Usinas solares e sistemas comerciais/industriais.",
+        "keywords": [
+          "transformador solar",
+          "média tensão",
+          "usina solar",
+          "transformador trifásico"
+        ]
+      }
+    }
+  ]
+}

@@ -11,6 +11,28 @@ type Props = {
 
 export async function generateStaticParams() {
   try {
+    // In development, use fixtures for static params
+    if (process.env.NODE_ENV === 'development') {
+      const fs = await import('fs');
+      const path = await import('path');
+
+      const fixturesPath = path.join(process.cwd(), 'src/lib/fixtures/products.json');
+      if (fs.existsSync(fixturesPath)) {
+        const products = JSON.parse(fs.readFileSync(fixturesPath, 'utf-8')) as any[];
+
+        // Get country codes (simplified for now)
+        const countryCodes = ['br']; // Default to Brazil
+
+        return products.flatMap((product) =>
+          countryCodes.map((countryCode) => ({
+            countryCode,
+            handle: product.handle,
+          }))
+        );
+      }
+    }
+
+    // Fallback to original logic
     const countryCodes = await listRegions().then((regions) =>
       regions?.map((r) => r.countries?.map((c) => c.iso_2)).flat()
     )

@@ -1,6 +1,6 @@
 /**
  * Medusa Client Wrapper - Integração Frontend ↔ Backend
- * 
+ *
  * Responsável por:
  * - Injetar x-publishable-api-key em todas requisições ao Store API
  * - Suporte a credentials: "include" para sessões/cookies
@@ -8,7 +8,7 @@
  * - Suporte a cache (ETag, Last-Modified)
  * - Retry logic e timeout
  * - Observabilidade (logs estruturados)
- * 
+ *
  * @see https://docs.medusajs.com/learn/storefront-development
  * @see https://docs.medusajs.com/resources/storefront-development/tips
  */
@@ -146,34 +146,78 @@ export class MedusaClient {
     }
 
     /**
-     * GET genérico com suporte a paginação
+     * GET genérico com suporte a cache (ETag, Last-Modified)
+     * Com fallback para fixtures em desenvolvimento
      */
     async get<T = any>(endpoint: string, params?: Record<string, any>): Promise<MedusaResponse<T>> {
-        return this.fetch<T>({ endpoint, params, method: 'GET' });
+        // Try fixtures first in development for specific endpoints
+        if (process.env.NODE_ENV === 'development') {
+            const fixtureData = await this.tryLoadFixtureForSingleEndpoint<T>(endpoint, params);
+            if (fixtureData) {
+                return fixtureData;
+            }
+        }
+
+        // Fallback to normal fetch
+        try {
+            return await this.fetch<T>({ endpoint, params, method: 'GET' });
+        } catch (error) {
+            // If connection failed and we're in dev, try fixtures as last resort
+            if (process.env.NODE_ENV === 'development' && isConnectionRefused(error)) {
+                console.warn('[MedusaClient] Backend unavailable, trying fixtures...');
+                const fixtureData = await this.tryLoadFixtureForSingleEndpoint<T>(endpoint, params);
+                if (fixtureData) {
+                    return fixtureData;
+                }
+            }
+            throw error;
+        }
     }
 
     /**
      * GET paginado (retorna count, offset, limit)
+     * Com fallback para fixtures em desenvolvimento
      */
     async getPaginated<T = any>(
         endpoint: string,
         params?: Record<string, any>
     ): Promise<MedusaResponse<MedusaPaginatedResponse<T>>> {
-        const response = await this.get<any>(endpoint, params);
+        // Try fixtures first in development
+        if (process.env.NODE_ENV === 'development') {
+            const fixtureData = await this.tryLoadFixtureForEndpoint<T>(endpoint, params);
+            if (fixtureData) {
+                return fixtureData;
+            }
+        }
 
-        // Medusa Store API retorna diferentes formatos dependendo do endpoint
-        // Normalizar para estrutura consistente
-        const data = response.data;
+        // Fallback to normal fetch
+        try {
+            const response = await this.get<any>(endpoint, params);
 
-        return {
-            ...response,
-            data: {
-                data: data.products || data.product_categories || data.regions || [],
-                count: data.count ?? 0,
-                offset: data.offset ?? 0,
-                limit: data.limit ?? 20,
-            },
-        };
+            // Medusa Store API retorna diferentes formatos dependendo do endpoint
+            // Normalizar para estrutura consistente
+            const data = response.data;
+
+            return {
+                ...response,
+                data: {
+                    data: data.products || data.product_categories || data.regions || [],
+                    count: data.count ?? 0,
+                    offset: data.offset ?? 0,
+                    limit: data.limit ?? 20,
+                },
+            };
+        } catch (error) {
+            // If connection failed and we're in dev, try fixtures as last resort
+            if (process.env.NODE_ENV === 'development' && isConnectionRefused(error)) {
+                console.warn('[MedusaClient] Backend unavailable, trying fixtures...');
+                const fixtureData = await this.tryLoadFixtureForEndpoint<T>(endpoint, params);
+                if (fixtureData) {
+                    return fixtureData;
+                }
+            }
+            throw error;
+        }
     }
 
     /**
@@ -354,6 +398,114 @@ export class MedusaClient {
     private sleep(ms: number): Promise<void> {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
+
+    private async tryLoadFixtureForEndpoint<T>(
+        endpoint: string,
+        params?: Record<string, any>
+    ): Promise<MedusaResponse<MedusaPaginatedResponse<T>> | null> {
+        try {
+            let fixturePath: string | null = null;
+            let mockData: any = null;
+
+            // Map endpoints to fixtures
+            if (endpoint.includes('/products')) {
+                fixturePath = 'products.json';
+                const products = await loadFixtures<any[]>(fixturePath);
+                if (products) {
+                    // Apply pagination params
+                    const limit = params?.limit || 24;
+                    const offset = params?.offset || 0;
+                    const paginatedProducts = products.slice(offset, offset + limit);
+
+                    mockData = {
+                        data: paginatedProducts,
+                        count: products.length,
+                        offset,
+                        limit,
+                    };
+                }
+            } else if (endpoint.includes('/product-categories')) {
+                fixturePath = 'categories.json';
+                const categoriesData = await loadFixtures<{ categories: any[] }>(fixturePath);
+                if (categoriesData) {
+                    const categories = categoriesData.categories;
+                    const limit = params?.limit || 20;
+                    const offset = params?.offset || 0;
+                    const paginatedCategories = categories.slice(offset, offset + limit);
+
+                    mockData = {
+                        data: paginatedCategories,
+                        count: categories.length,
+                        offset,
+                        limit,
+                    };
+                }
+            }
+
+            if (mockData) {
+                return {
+                    data: mockData,
+                    status: 200,
+                    headers: new Headers(),
+                    etag: undefined,
+                    lastModified: undefined,
+                };
+            }
+        } catch (error) {
+            console.warn('[MedusaClient] Fixture loading failed:', error);
+        }
+
+        return null;
+    }
+
+    private async tryLoadFixtureForSingleEndpoint<T>(
+        endpoint: string,
+        params?: Record<string, any>
+    ): Promise<MedusaResponse<T> | null> {
+        try {
+            // Handle individual product requests
+            const productMatch = endpoint.match(/^\/store\/products\/([^/?]+)$/);
+            if (productMatch) {
+                const handle = productMatch[1];
+                const products = await loadFixtures<any[]>('products.json');
+                if (products) {
+                    const product = products.find(p => p.handle === handle);
+                    if (product) {
+                        return {
+                            data: { product } as T,
+                            status: 200,
+                            headers: new Headers(),
+                            etag: undefined,
+                            lastModified: undefined,
+                        };
+                    }
+                }
+            }
+
+            // Handle individual category requests
+            const categoryMatch = endpoint.match(/^\/store\/product-categories\/([^/?]+)$/);
+            if (categoryMatch) {
+                const handle = categoryMatch[1];
+                const categoriesData = await loadFixtures<{ categories: any[] }>('categories.json');
+                if (categoriesData) {
+                    const category = categoriesData.categories.find(c => c.handle === handle);
+                    if (category) {
+                        return {
+                            data: { product_category: category } as T,
+                            status: 200,
+                            headers: new Headers(),
+                            etag: undefined,
+                            lastModified: undefined,
+                        };
+                    }
+                }
+            }
+        } catch (error) {
+            console.warn('[MedusaClient] Single fixture loading failed:', error);
+        }
+
+        return null;
+    }
 }
 
 // ============================================================================
@@ -397,3 +549,37 @@ export const medusaClient = {
     delete: (endpoint: string, params?: Record<string, any>) =>
         getMedusaClient().delete(endpoint, params),
 };
+
+// ============================================================================
+// FIXTURE FALLBACK FOR DEVELOPMENT
+// ============================================================================
+
+/**
+ * Load fixtures from local files for development
+ */
+async function loadFixtures<T>(fixturePath: string): Promise<T | null> {
+    try {
+        if (process.env.NODE_ENV !== 'development') return null;
+
+        const fs = await import('fs');
+        const path = await import('path');
+
+        const fixtureFile = path.join(process.cwd(), 'src/lib/fixtures', fixturePath);
+        if (!fs.existsSync(fixtureFile)) return null;
+
+        const data = JSON.parse(fs.readFileSync(fixtureFile, 'utf-8'));
+        return data;
+    } catch (error) {
+        console.warn('[MedusaClient] Failed to load fixture:', fixturePath, error);
+        return null;
+    }
+}
+
+/**
+ * Check if error is connection refused
+ */
+function isConnectionRefused(error: any): boolean {
+    return error?.message?.includes('ECONNREFUSED') ||
+           error?.message?.includes('ENOTFOUND') ||
+           error?.message?.includes('fetch failed');
+}
