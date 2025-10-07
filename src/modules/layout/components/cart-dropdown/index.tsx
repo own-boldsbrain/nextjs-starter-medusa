@@ -80,12 +80,29 @@ const CartDropdown = ({
       onMouseLeave={close}
     >
       <Popover className="relative h-full">
-        <PopoverButton className="h-full">
-          <LocalizedClientLink
-            className="hover:text-ui-fg-base"
-            href="/cart"
-            data-testid="nav-cart-link"
-          >{`Cart (${totalItems})`}</LocalizedClientLink>
+        <PopoverButton className="relative p-2 hover:bg-ui-bg-subtle rounded-lg transition-colors">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+            />
+          </svg>
+          {totalItems > 0 && (
+            <span
+              className="absolute -top-1 -right-1 bg-ui-fg-interactive text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center"
+              data-testid="cart-item-count"
+            >
+              {totalItems}
+            </span>
+          )}
         </PopoverButton>
         <Transition
           show={cartDropdownOpen}
@@ -99,11 +116,16 @@ const CartDropdown = ({
         >
           <PopoverPanel
             static
-            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[420px] text-ui-fg-base"
+            className="hidden small:block absolute top-[calc(100%+8px)] right-0 bg-white border border-ui-border-base shadow-2xl rounded-xl w-[420px] text-ui-fg-base"
             data-testid="nav-cart-dropdown"
           >
-            <div className="p-4 flex items-center justify-center">
-              <h3 className="text-large-semi">Cart</h3>
+            <div className="p-4 flex items-center justify-between border-b border-ui-border-base">
+              <h3 className="text-lg font-semibold">Carrinho</h3>
+              {totalItems > 0 && (
+                <span className="text-sm text-ui-fg-subtle">
+                  {totalItems} {totalItems === 1 ? 'item' : 'itens'}
+                </span>
+              )}
             </div>
             {cartState && cartState.items?.length ? (
               <>
@@ -174,14 +196,13 @@ const CartDropdown = ({
                       </div>
                     ))}
                 </div>
-                <div className="p-4 flex flex-col gap-y-4 text-small-regular">
+                <div className="p-4 flex flex-col gap-y-4 text-small-regular border-t border-ui-border-base bg-ui-bg-subtle">
                   <div className="flex items-center justify-between">
-                    <span className="text-ui-fg-base font-semibold">
-                      Subtotal{" "}
-                      <span className="font-normal">(excl. taxes)</span>
+                    <span className="text-sm font-medium text-ui-fg-base">
+                      Subtotal
                     </span>
                     <span
-                      className="text-large-semi"
+                      className="text-lg font-bold text-ui-fg-base"
                       data-testid="cart-subtotal"
                       data-value={subtotal}
                     >
@@ -197,27 +218,48 @@ const CartDropdown = ({
                       size="large"
                       data-testid="go-to-cart-button"
                     >
-                      Go to cart
+                      Ver carrinho completo
                     </Button>
+                  </LocalizedClientLink>
+                  <LocalizedClientLink href="/checkout" passHref>
+                    <button
+                      className="w-full text-center text-sm text-ui-fg-interactive hover:text-ui-fg-interactive-hover transition-colors font-medium"
+                      data-testid="go-to-checkout-link"
+                    >
+                      Ir para checkout →
+                    </button>
                   </LocalizedClientLink>
                 </div>
               </>
             ) : (
-              <div>
-                <div className="flex py-16 flex-col gap-y-4 items-center justify-center">
-                  <div className="bg-gray-900 text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-white">
-                    <span>0</span>
-                  </div>
-                  <span>Your shopping bag is empty.</span>
-                  <div>
-                    <LocalizedClientLink href="/store">
-                      <>
-                        <span className="sr-only">Go to all products page</span>
-                        <Button onClick={close}>Explore products</Button>
-                      </>
-                    </LocalizedClientLink>
-                  </div>
+              <div className="p-8 text-center" data-testid="cart-empty-state">
+                <div className="mx-auto w-24 h-24 mb-4 bg-ui-bg-subtle rounded-full flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-12 h-12 text-ui-fg-muted"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                    />
+                  </svg>
                 </div>
+                <h4 className="text-base font-medium text-ui-fg-base mb-2">
+                  Seu carrinho está vazio
+                </h4>
+                <p className="text-sm text-ui-fg-subtle mb-4">
+                  Adicione produtos para começar
+                </p>
+                <LocalizedClientLink href="/store">
+                  <Button onClick={close} className="mx-auto">
+                    Explorar produtos
+                  </Button>
+                </LocalizedClientLink>
               </div>
             )}
           </PopoverPanel>
