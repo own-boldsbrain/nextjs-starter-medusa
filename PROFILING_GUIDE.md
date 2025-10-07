@@ -1,16 +1,19 @@
 # 📊 Guia de Profiling React - Yello Solar Hub
 
 ## 🎯 Objetivo
+
 Este guia fornece instruções passo-a-passo para executar profiling real em páginas críticas usando React Profiler, coletar flamegraphs e identificar hotspots de performance.
 
 ## 🛠️ Ferramentas Disponíveis
 
 ### 1. **withRenderCounter HOC**
+
 - **Localização**: `src/lib/design-system/dev/withRenderCounter.tsx`
 - **Uso**: Já aplicado em `Button` e `PanelCard`
 - **Funcionalidade**: Conta e registra renders no console
 
 ### 2. **ProfilerWrapper Component**
+
 - **Localização**: `src/lib/design-system/dev/ProfilerWrapper.tsx`
 - **Funcionalidade**: Wrapper do React Profiler com coleta de dados
 - **Recursos**:
@@ -19,6 +22,7 @@ Este guia fornece instruções passo-a-passo para executar profiling real em pá
   - Exportação de dados em JSON, CSV e formato Flamegraph
 
 ### 3. **ProfilingControls Component**
+
 - **Localização**: `src/lib/design-system/dev/ProfilingControls.tsx`
 - **Funcionalidade**: Painel de controle flutuante para gerenciar sessão de profiling
 - **Recursos**:
@@ -32,6 +36,7 @@ Este guia fornece instruções passo-a-passo para executar profiling real em pá
 ### **Etapa 1: Identificar Páginas Críticas**
 
 Páginas recomendadas para profiling inicial:
+
 - ✅ `/produtos` - Listagem geral de produtos
 - ✅ `/produtos/paineis` - Listagem de painéis solares
 - ✅ `/produtos/inversores` - Listagem de inversores
@@ -113,39 +118,46 @@ npm run dev
 Execute estas ações enquanto o profiler está gravando:
 
 #### Cenário 1: Navegação Inicial
+
 - Carregue a página `/produtos`
 - Aguarde renderização completa
 - Observe console para render counts
 
 #### Cenário 2: Interação com Filtros
+
 - Aplique filtros (categoria, preço, fabricante)
 - Observe re-renders desnecessários
 - Verifique se apenas componentes afetados re-renderizam
 
 #### Cenário 3: Scroll de Lista
+
 - Role a lista de produtos
 - Verifique lazy loading de imagens
 - Observe performance de virtualização (se aplicável)
 
 #### Cenário 4: Adicionar ao Carrinho
+
 - Clique em "Adicionar ao Carrinho" múltiplas vezes
 - Observe re-renders de componentes
 - Verifique propagação de estado
 
 #### Cenário 5: Navegação Entre Páginas
+
 - Navegue de `/produtos` para `/produtos/[slug]`
 - Retorne para `/produtos`
 - Verifique mount/unmount performance
 
 ### **Etapa 6: Coletar Dados**
 
-#### Via React DevTools:
+#### Via React DevTools
+
 1. Pare a gravação (clique no botão Record novamente)
 2. Analise flamegraph no DevTools
 3. Clique com botão direito → **Export profile**
 4. Salve o arquivo JSON
 
-#### Via ProfilingControls (nosso painel):
+#### Via ProfilingControls (nosso painel)
+
 1. Clique no botão **"📊 Profiler"** (canto inferior direito)
 2. Visualize estatísticas agregadas
 3. Veja top 5 componentes mais lentos
@@ -178,7 +190,7 @@ Abra console do DevTools para ver logs detalhados:
 
 ### **Etapa 8: Interpretar Resultados**
 
-#### Métricas Importantes:
+#### Métricas Importantes
 
 - **actualDuration**: Tempo real de render (incluindo children)
   - ✅ < 16ms: Excelente (60 FPS)
@@ -195,23 +207,27 @@ Abra console do DevTools para ver logs detalhados:
 - **Total Renders**: Número de re-renders
   - Alto número de updates → investigar dependências
 
-#### Sinais de Alerta:
+#### Sinais de Alerta
 
 🔴 **Componente re-renderiza sem mudança de props**
+
 - Solução: Adicionar React.memo ou verificar parent
 
 🔴 **Componente com actualDuration > 50ms**
+
 - Solução: Otimizar lógica ou virtualizar lista
 
 🔴 **Muitos updates em cascata**
+
 - Solução: Revisar estrutura de estado e callbacks
 
 🔴 **baseDuration >> actualDuration**
+
 - ✅ Memoization funcionando bem
 
 ### **Etapa 9: Exportar Flamegraph**
 
-#### Formato de Exportação:
+#### Formato de Exportação
 
 ```json
 {
@@ -230,9 +246,9 @@ Abra console do DevTools para ver logs detalhados:
 }
 ```
 
-#### Visualizar Flamegraph:
+#### Visualizar Flamegraph
 
-1. Acesse: https://www.speedscope.app/
+1. Acesse: <https://www.speedscope.app/>
 2. Clique em **"Browse"** e selecione JSON exportado
 3. Analise flamegraph interativo
 4. Identifique funções/componentes lentos
@@ -240,6 +256,7 @@ Abra console do DevTools para ver logs detalhados:
 ### **Etapa 10: Documentar Findings**
 
 Crie relatório com:
+
 - Screenshots de flamegraphs
 - Métricas antes/depois
 - Componentes problemáticos identificados
@@ -262,7 +279,8 @@ Crie relatório com:
 
 ## 📊 Exemplo de Análise
 
-### Antes da Otimização:
+### Antes da Otimização
+
 ```
 Component: PanelCard
 Total Renders: 127
@@ -270,7 +288,8 @@ Avg Duration: 48.50ms
 Max Duration: 125.30ms
 ```
 
-### Após React.memo + useCallback:
+### Após React.memo + useCallback
+
 ```
 Component: PanelCard
 Total Renders: 12
@@ -298,6 +317,7 @@ Max Duration: 15.40ms
 ---
 
 **Notas Importantes**:
+
 - ⚠️ Profiling tools apenas funcionam em `NODE_ENV=development`
 - ⚠️ Resultados em produção podem variar (bundle minificado, sem DevTools)
 - ⚠️ Use Chrome/Edge para melhor suporte a DevTools

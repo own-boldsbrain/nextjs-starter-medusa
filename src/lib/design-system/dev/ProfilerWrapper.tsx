@@ -12,20 +12,9 @@
 
 import React, { Profiler, useRef, useCallback } from 'react'
 
-// React Profiler onRender callback type
-type ProfilerOnRenderCallback = (
-    id: string,
-    phase: 'mount' | 'update' | 'nested-update',
-    actualDuration: number,
-    baseDuration: number,
-    startTime: number,
-    commitTime: number,
-    interactions: Set<unknown>
-) => void
-
 export interface ProfilerData {
     id: string
-    phase: 'mount' | 'update'
+    phase: 'mount' | 'update' | 'nested-update'
     actualDuration: number
     baseDuration: number
     startTime: number
