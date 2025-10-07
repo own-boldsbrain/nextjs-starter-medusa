@@ -29,8 +29,8 @@ export default async function ProductPreview({
   })
 
   return (
-    <LocalizedClientLink 
-      href={`/products/${product.handle}`} 
+    <LocalizedClientLink
+      href={`/products/${product.handle}`}
       className="group"
       data-testid={`product-link-${product.handle}`}
     >
