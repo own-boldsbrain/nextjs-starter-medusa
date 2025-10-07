@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     "Plataforma enterprise para dimensionamento, simulação e gestão de sistemas de energia solar fotovoltaica. TIER classification, HSP regions, sizing AI integrado.",
 }
 
+/**
+ * Force dynamic rendering to avoid build-time fetches
+ */
+export const dynamic = 'force-dynamic';
+
 export default async function Home(props: {
   params: Promise<{ countryCode: string }>
 }) {

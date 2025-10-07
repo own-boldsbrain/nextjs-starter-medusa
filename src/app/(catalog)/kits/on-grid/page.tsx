@@ -3,6 +3,11 @@ import { ProductCard } from '@/components/product/ProductCard';
 
 export const revalidate = 3600; // ISR: 1 hour
 
+/**
+ * Force dynamic rendering to avoid build-time fetches
+ */
+export const dynamic = 'force-dynamic';
+
 export default async function KitOnGridPage() {
     const { products, count } = await getProductsByCategory('on-grid');
 

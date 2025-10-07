@@ -3,6 +3,11 @@ import { ProductCard } from '@/components/product/ProductCard';
 
 export const revalidate = 3600;
 
+/**
+ * Force dynamic rendering to avoid build-time fetches
+ */
+export const dynamic = 'force-dynamic';
+
 export default async function PaineisSolaresPage() {
     const { products, count } = await getProductsByCategory('paineis-solares');
 
