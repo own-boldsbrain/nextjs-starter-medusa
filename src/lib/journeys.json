@@ -1,0 +1,1106 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "version": "1.0.0",
+    "generated": "2025-10-06",
+    "journeys": [
+        {
+            "journey_key": "B1_residencial_convencional_autoconsumo_local",
+            "profile": {
+                "classe": "B1",
+                "tarifa": "Convencional",
+                "modalidade_scee": "autoconsumo_local",
+                "persona": "Proprietário residencial, consumo médio 300-500 kWh/mês, telhado próprio"
+            },
+            "stages": [
+                {
+                    "id": "discover",
+                    "name": "Descoberta e Educação",
+                    "goal": "Entender economia e viabilidade de energia solar",
+                    "ui_components": [
+                        "hero_value_proposition",
+                        "roi_calculator_simple",
+                        "benefits_grid",
+                        "social_proof_testimonials"
+                    ],
+                    "user_actions": [
+                        "view_hero",
+                        "input_monthly_bill",
+                        "calculate_savings",
+                        "view_testimonials"
+                    ],
+                    "kpis": [
+                        "ctr_calculator",
+                        "engagement_time_hero",
+                        "calculator_completion_rate",
+                        "bounce_rate"
+                    ],
+                    "success_criteria": "Usuário calcula economia e avança para configuração",
+                    "exit_points": [
+                        "doubt_about_investment",
+                        "roof_concerns",
+                        "price_shock"
+                    ]
+                },
+                {
+                    "id": "configure",
+                    "name": "Configuração e Dimensionamento",
+                    "goal": "Dimensionar sistema ideal para perfil de consumo",
+                    "ui_components": [
+                        "consumption_profile_wizard",
+                        "system_sizing_recommendation",
+                        "product_comparison_table",
+                        "roof_assessment_tool"
+                    ],
+                    "user_actions": [
+                        "input_consumption_data",
+                        "select_roof_type",
+                        "choose_equipment_tier",
+                        "compare_kits",
+                        "add_to_cart"
+                    ],
+                    "kpis": [
+                        "configuration_completion_rate",
+                        "avg_time_to_configure",
+                        "cart_addition_rate",
+                        "comparison_tool_usage"
+                    ],
+                    "success_criteria": "Sistema dimensionado e produto adicionado ao carrinho",
+                    "barriers": [
+                        "Dados de consumo incompletos",
+                        "Incerteza sobre telhado",
+                        "Complexidade técnica percebida"
+                    ],
+                    "resolutions": [
+                        "Upload de fatura automático (OCR)",
+                        "Agendamento de visita técnica virtual",
+                        "Recomendação simplificada por faixas"
+                    ]
+                },
+                {
+                    "id": "finance",
+                    "name": "Financiamento e Checkout",
+                    "goal": "Aprovar crédito ou processar pagamento",
+                    "ui_components": [
+                        "payment_method_selector",
+                        "financing_simulator",
+                        "installment_calculator",
+                        "credit_pre_approval_form",
+                        "checkout_summary"
+                    ],
+                    "user_actions": [
+                        "select_payment_method",
+                        "simulate_financing",
+                        "apply_for_credit",
+                        "complete_purchase",
+                        "schedule_installation"
+                    ],
+                    "kpis": [
+                        "financing_request_rate",
+                        "credit_approval_rate",
+                        "payment_success_rate",
+                        "cart_abandonment_rate",
+                        "avg_time_to_approve"
+                    ],
+                    "success_criteria": "Pagamento confirmado ou crédito pré-aprovado",
+                    "barriers": [
+                        "Rejeição de crédito",
+                        "Parcelas muito altas",
+                        "Falta de documentação"
+                    ],
+                    "resolutions": [
+                        "Oferecer entrada maior para reduzir parcela",
+                        "Modalidade leasing/PPA como alternativa",
+                        "Upload simplificado de documentos"
+                    ]
+                },
+                {
+                    "id": "homologate",
+                    "name": "Instalação e Homologação",
+                    "goal": "Conectar sistema à rede e homologar na distribuidora",
+                    "ui_components": [
+                        "installation_timeline_tracker",
+                        "document_upload_portal",
+                        "milestone_progress_bar",
+                        "support_chat_widget"
+                    ],
+                    "user_actions": [
+                        "upload_documentation",
+                        "track_installation_status",
+                        "approve_installation_date",
+                        "validate_homologation_docs"
+                    ],
+                    "kpis": [
+                        "installation_lead_time",
+                        "homologation_approval_rate",
+                        "rework_rate",
+                        "customer_satisfaction_score"
+                    ],
+                    "success_criteria": "Sistema instalado e homologado na distribuidora",
+                    "barriers": [
+                        "Documentação rejeitada pela distribuidora",
+                        "Atraso na instalação",
+                        "Problemas técnicos no sistema"
+                    ],
+                    "resolutions": [
+                        "Checklist de documentos por distribuidora",
+                        "Comunicação proativa sobre status",
+                        "Garantia e suporte técnico"
+                    ]
+                },
+                {
+                    "id": "post_sale",
+                    "name": "Pós-venda e Expansão",
+                    "goal": "Adotar, monitorar e expandir sistema",
+                    "ui_components": [
+                        "energy_monitoring_dashboard",
+                        "roi_tracker",
+                        "loyalty_program_widget",
+                        "upsell_recommendations"
+                    ],
+                    "user_actions": [
+                        "view_generation_data",
+                        "track_savings",
+                        "redeem_loyalty_points",
+                        "request_system_expansion",
+                        "refer_friends"
+                    ],
+                    "kpis": [
+                        "nps_score",
+                        "dashboard_engagement_rate",
+                        "expansion_conversion_rate",
+                        "referral_rate",
+                        "churn_rate"
+                    ],
+                    "success_criteria": "Cliente satisfeito, sistema monitorado, expansão considerada",
+                    "upsell_opportunities": [
+                        "Baterias para backup noturno",
+                        "Carregador EV residencial",
+                        "Expansão de potência"
+                    ]
+                }
+            ],
+            "risks": [
+                "Dados de consumo incompletos ou incorretos",
+                "Telhado inadequado (sombreamento, orientação, estrutura)",
+                "Rejeição de crédito",
+                "Expectativas irreais de ROI"
+            ],
+            "telemetry_events": [
+                "view_journey_b1",
+                "calculate_roi_b1",
+                "configure_system_b1",
+                "add_to_cart_b1",
+                "request_financing_b1",
+                "complete_purchase_b1",
+                "milestone_installation_b1",
+                "milestone_homologation_b1",
+                "view_dashboard_b1",
+                "request_expansion_b1"
+            ],
+            "messaging": {
+                "value_prop": "Reduza sua conta de luz em até 95% com energia solar própria",
+                "social_proof": "Mais de 5.000 famílias já economizam com YSH",
+                "risk_mitigation": "Garantia de 25 anos nos painéis, financiamento em até 120x"
+            }
+        },
+        {
+            "journey_key": "B1_residencial_tarifa_branca_autoconsumo_local",
+            "profile": {
+                "classe": "B1",
+                "tarifa": "Branca",
+                "modalidade_scee": "autoconsumo_local",
+                "persona": "Proprietário residencial, consumo concentrado fora de ponta, tarifa branca ativa"
+            },
+            "stages": [
+                {
+                    "id": "discover",
+                    "name": "Descoberta e Comparação Tarifária",
+                    "goal": "Entender vantagem da tarifa branca + solar",
+                    "ui_components": [
+                        "tariff_comparison_widget",
+                        "hourly_consumption_visualizer",
+                        "savings_breakdown_chart",
+                        "badge_tarifa_branca_optimized"
+                    ],
+                    "user_actions": [
+                        "view_tariff_comparison",
+                        "input_hourly_consumption",
+                        "see_ponta_vs_fora_ponta_savings"
+                    ],
+                    "kpis": [
+                        "tariff_comparison_engagement",
+                        "hourly_input_completion_rate"
+                    ],
+                    "success_criteria": "Usuário entende otimização tarifária e avança"
+                },
+                {
+                    "id": "configure",
+                    "name": "Dimensionamento com Otimização Tarifária",
+                    "goal": "Maximizar geração fora de ponta",
+                    "ui_components": [
+                        "tariff_optimized_sizing",
+                        "battery_recommendation_conditional",
+                        "self_consumption_simulator"
+                    ],
+                    "user_actions": [
+                        "configure_system_with_tariff_data",
+                        "evaluate_battery_addon",
+                        "optimize_self_consumption"
+                    ],
+                    "kpis": [
+                        "battery_attachment_rate",
+                        "tariff_optimized_cart_value"
+                    ],
+                    "success_criteria": "Sistema otimizado para tarifa branca configurado"
+                },
+                {
+                    "id": "finance",
+                    "name": "Financiamento com ROI Otimizado",
+                    "goal": "Demonstrar ROI superior com tarifa branca",
+                    "ui_components": [
+                        "roi_comparison_branca_vs_convencional",
+                        "financing_with_savings_offset"
+                    ],
+                    "user_actions": [
+                        "compare_roi_scenarios",
+                        "apply_financing_with_tariff_context"
+                    ],
+                    "kpis": [
+                        "financing_approval_rate_branca",
+                        "avg_roi_expectation"
+                    ],
+                    "success_criteria": "Cliente entende ROI superior e completa compra"
+                },
+                {
+                    "id": "homologate",
+                    "name": "Instalação e Homologação Tarifa Branca",
+                    "goal": "Garantir configuração correta do medidor",
+                    "ui_components": [
+                        "tariff_setup_checklist",
+                        "meter_configuration_guide"
+                    ],
+                    "user_actions": [
+                        "validate_tariff_setup",
+                        "confirm_meter_configuration"
+                    ],
+                    "kpis": [
+                        "tariff_setup_success_rate",
+                        "meter_config_rework_rate"
+                    ],
+                    "success_criteria": "Medidor configurado para tarifa branca corretamente"
+                },
+                {
+                    "id": "post_sale",
+                    "name": "Monitoramento com Análise Tarifária",
+                    "goal": "Acompanhar economia por horário",
+                    "ui_components": [
+                        "hourly_savings_dashboard",
+                        "peak_vs_offpeak_comparison"
+                    ],
+                    "user_actions": [
+                        "view_hourly_savings",
+                        "optimize_consumption_habits"
+                    ],
+                    "kpis": [
+                        "dashboard_hourly_engagement",
+                        "habit_optimization_rate"
+                    ],
+                    "success_criteria": "Cliente otimiza hábitos e maximiza economia"
+                }
+            ],
+            "risks": [
+                "Consumo não otimizado para tarifa branca",
+                "Expectativas irreais de economia em horário de ponta"
+            ],
+            "telemetry_events": [
+                "view_tariff_comparison_branca",
+                "calculate_hourly_savings",
+                "configure_tariff_optimized_system",
+                "evaluate_battery_addon"
+            ],
+            "messaging": {
+                "value_prop": "Maximize sua economia com tarifa branca + energia solar",
+                "badge": "Otimizado para Tarifa Branca",
+                "risk_mitigation": "Simulação personalizada com sua curva de consumo"
+            }
+        },
+        {
+            "journey_key": "B2_rural_convencional_autoconsumo_local",
+            "profile": {
+                "classe": "B2",
+                "tarifa": "Convencional",
+                "modalidade_scee": "autoconsumo_local",
+                "persona": "Produtor rural, consumo elevado (bombeamento, irrigação), área disponível"
+            },
+            "stages": [
+                {
+                    "id": "discover",
+                    "name": "Descoberta e Viabilidade Rural",
+                    "goal": "Entender redução de custos operacionais",
+                    "ui_components": [
+                        "rural_calculator_with_irrigation",
+                        "subsidy_eligibility_checker",
+                        "rural_case_studies"
+                    ],
+                    "user_actions": [
+                        "input_rural_consumption",
+                        "check_pronaf_eligibility",
+                        "view_rural_cases"
+                    ],
+                    "kpis": [
+                        "rural_calculator_usage",
+                        "subsidy_inquiry_rate"
+                    ],
+                    "success_criteria": "Produtor entende viabilidade e subsídios"
+                },
+                {
+                    "id": "configure",
+                    "name": "Dimensionamento para Operação Rural",
+                    "goal": "Atender demanda de irrigação/bombeamento",
+                    "ui_components": [
+                        "rural_load_profiler",
+                        "ground_mount_vs_roof_selector",
+                        "three_phase_system_configurator"
+                    ],
+                    "user_actions": [
+                        "profile_irrigation_loads",
+                        "select_installation_type",
+                        "configure_three_phase_system"
+                    ],
+                    "kpis": [
+                        "rural_configuration_completion",
+                        "ground_mount_selection_rate"
+                    ],
+                    "success_criteria": "Sistema dimensionado para operação rural"
+                },
+                {
+                    "id": "finance",
+                    "name": "Financiamento Rural e Subsídios",
+                    "goal": "Acessar linhas de crédito rural",
+                    "ui_components": [
+                        "pronaf_financing_simulator",
+                        "subsidy_application_form",
+                        "rural_credit_preapproval"
+                    ],
+                    "user_actions": [
+                        "simulate_pronaf_rates",
+                        "apply_for_subsidies",
+                        "request_rural_credit"
+                    ],
+                    "kpis": [
+                        "pronaf_application_rate",
+                        "subsidy_approval_rate"
+                    ],
+                    "success_criteria": "Financiamento rural aprovado"
+                },
+                {
+                    "id": "homologate",
+                    "name": "Instalação Rural e Homologação",
+                    "goal": "Instalar em área rural e conectar",
+                    "ui_components": [
+                        "rural_installation_guide",
+                        "rural_utility_coordination"
+                    ],
+                    "user_actions": [
+                        "coordinate_rural_installation",
+                        "validate_utility_connection"
+                    ],
+                    "kpis": [
+                        "rural_installation_lead_time",
+                        "rural_homologation_success_rate"
+                    ],
+                    "success_criteria": "Sistema rural instalado e conectado"
+                },
+                {
+                    "id": "post_sale",
+                    "name": "Monitoramento de Operação Rural",
+                    "goal": "Acompanhar economia operacional",
+                    "ui_components": [
+                        "irrigation_energy_dashboard",
+                        "operational_savings_tracker"
+                    ],
+                    "user_actions": [
+                        "monitor_irrigation_costs",
+                        "track_operational_savings"
+                    ],
+                    "kpis": [
+                        "rural_dashboard_engagement",
+                        "operational_roi_tracking"
+                    ],
+                    "success_criteria": "Produtor acompanha economia operacional",
+                    "upsell_opportunities": [
+                        "Expansão para irrigação adicional",
+                        "Sistemas de bombeamento solar direto"
+                    ]
+                }
+            ],
+            "risks": [
+                "Acesso remoto dificulta instalação",
+                "Rede rural instável",
+                "Sazonalidade de consumo"
+            ],
+            "telemetry_events": [
+                "view_rural_journey",
+                "calculate_rural_savings",
+                "check_pronaf_eligibility",
+                "configure_rural_system",
+                "apply_rural_financing"
+            ],
+            "messaging": {
+                "value_prop": "Reduza custos de irrigação em até 90% com energia solar",
+                "social_proof": "Produtores rurais já economizam milhares por mês",
+                "risk_mitigation": "Financiamento PRONAF com taxas subsidiadas"
+            }
+        },
+        {
+            "journey_key": "B3_comercial_convencional_autoconsumo_local",
+            "profile": {
+                "classe": "B3",
+                "tarifa": "Convencional",
+                "modalidade_scee": "autoconsumo_local",
+                "persona": "Empresário/gestor, comércio/serviços, telhado comercial disponível"
+            },
+            "stages": [
+                {
+                    "id": "discover",
+                    "name": "Descoberta e Business Case",
+                    "goal": "Entender redução de custos operacionais",
+                    "ui_components": [
+                        "commercial_roi_calculator",
+                        "tax_benefit_estimator",
+                        "commercial_case_studies"
+                    ],
+                    "user_actions": [
+                        "input_commercial_consumption",
+                        "calculate_tax_benefits",
+                        "view_commercial_cases"
+                    ],
+                    "kpis": [
+                        "commercial_calculator_usage",
+                        "tax_benefit_inquiry_rate"
+                    ],
+                    "success_criteria": "Empresário entende business case"
+                },
+                {
+                    "id": "configure",
+                    "name": "Dimensionamento Comercial",
+                    "goal": "Atender demanda comercial com ROI otimizado",
+                    "ui_components": [
+                        "commercial_load_profiler",
+                        "peak_demand_analyzer",
+                        "commercial_system_configurator"
+                    ],
+                    "user_actions": [
+                        "profile_commercial_loads",
+                        "analyze_peak_demand",
+                        "configure_commercial_system"
+                    ],
+                    "kpis": [
+                        "commercial_configuration_completion",
+                        "peak_demand_optimization_rate"
+                    ],
+                    "success_criteria": "Sistema comercial dimensionado"
+                },
+                {
+                    "id": "finance",
+                    "name": "Financiamento Empresarial",
+                    "goal": "Acessar linhas de crédito empresarial",
+                    "ui_components": [
+                        "corporate_financing_simulator",
+                        "leasing_option_comparator",
+                        "ppa_proposal_generator"
+                    ],
+                    "user_actions": [
+                        "simulate_corporate_rates",
+                        "compare_leasing_vs_purchase",
+                        "request_ppa_proposal"
+                    ],
+                    "kpis": [
+                        "corporate_financing_request_rate",
+                        "leasing_vs_purchase_preference",
+                        "ppa_inquiry_rate"
+                    ],
+                    "success_criteria": "Financiamento empresarial aprovado"
+                },
+                {
+                    "id": "homologate",
+                    "name": "Instalação Comercial e Homologação",
+                    "goal": "Instalar sem interromper operação",
+                    "ui_components": [
+                        "non_disruptive_installation_scheduler",
+                        "commercial_utility_coordination"
+                    ],
+                    "user_actions": [
+                        "schedule_off_hours_installation",
+                        "coordinate_utility_approval"
+                    ],
+                    "kpis": [
+                        "installation_without_downtime_rate",
+                        "commercial_homologation_time"
+                    ],
+                    "success_criteria": "Sistema instalado sem interrupção"
+                },
+                {
+                    "id": "post_sale",
+                    "name": "Monitoramento Empresarial",
+                    "goal": "Acompanhar redução de custos operacionais",
+                    "ui_components": [
+                        "commercial_energy_dashboard",
+                        "cost_reduction_tracker",
+                        "sustainability_report_generator"
+                    ],
+                    "user_actions": [
+                        "monitor_energy_costs",
+                        "track_cost_reduction",
+                        "generate_sustainability_reports"
+                    ],
+                    "kpis": [
+                        "commercial_dashboard_engagement",
+                        "sustainability_report_downloads"
+                    ],
+                    "success_criteria": "Empresa acompanha economia e sustentabilidade",
+                    "upsell_opportunities": [
+                        "Expansão de potência",
+                        "Baterias para backup crítico",
+                        "Carregadores EV para frota"
+                    ]
+                }
+            ],
+            "risks": [
+                "Interrupção de operação durante instalação",
+                "ROI não atende expectativas de payback",
+                "Complexidade de aprovação interna"
+            ],
+            "telemetry_events": [
+                "view_commercial_journey",
+                "calculate_commercial_roi",
+                "calculate_tax_benefits",
+                "configure_commercial_system",
+                "request_corporate_financing"
+            ],
+            "messaging": {
+                "value_prop": "Reduza custos operacionais em até 80% e aumente competitividade",
+                "social_proof": "Empresas já economizam milhares por mês",
+                "risk_mitigation": "Instalação sem interrupção de operação"
+            }
+        },
+        {
+            "journey_key": "A_media_tensao_azul_autoconsumo_local",
+            "profile": {
+                "classe": "A",
+                "tarifa": "Azul",
+                "modalidade_scee": "autoconsumo_local",
+                "persona": "Grande consumidor industrial, tarifação complexa (demanda + consumo), engenheiro/gestor técnico"
+            },
+            "stages": [
+                {
+                    "id": "discover",
+                    "name": "Análise Técnico-Financeira Complexa",
+                    "goal": "Entender redução de demanda contratada e consumo",
+                    "ui_components": [
+                        "industrial_roi_calculator_advanced",
+                        "demand_charge_optimizer",
+                        "power_factor_analyzer",
+                        "industrial_case_studies"
+                    ],
+                    "user_actions": [
+                        "input_demand_and_consumption_data",
+                        "analyze_demand_charges",
+                        "calculate_power_factor_impact",
+                        "view_industrial_cases"
+                    ],
+                    "kpis": [
+                        "industrial_calculator_usage",
+                        "demand_optimization_inquiry_rate"
+                    ],
+                    "success_criteria": "Gestor entende complexidade tarifária e potencial"
+                },
+                {
+                    "id": "configure",
+                    "name": "Dimensionamento Industrial Complexo",
+                    "goal": "Otimizar demanda contratada e fator de potência",
+                    "ui_components": [
+                        "industrial_load_profiler_advanced",
+                        "demand_contract_optimizer",
+                        "power_quality_system_configurator"
+                    ],
+                    "user_actions": [
+                        "profile_industrial_loads_detailed",
+                        "optimize_demand_contract",
+                        "configure_power_quality_system"
+                    ],
+                    "kpis": [
+                        "industrial_configuration_completion",
+                        "demand_optimization_rate"
+                    ],
+                    "success_criteria": "Sistema industrial dimensionado com otimização tarifária"
+                },
+                {
+                    "id": "finance",
+                    "name": "Financiamento Estruturado",
+                    "goal": "Estruturar financiamento de grande porte",
+                    "ui_components": [
+                        "structured_financing_proposal",
+                        "ppa_industrial_simulator",
+                        "capex_vs_opex_comparator"
+                    ],
+                    "user_actions": [
+                        "request_structured_financing",
+                        "simulate_ppa_industrial",
+                        "compare_capex_opex_models"
+                    ],
+                    "kpis": [
+                        "structured_financing_request_rate",
+                        "ppa_vs_capex_preference"
+                    ],
+                    "success_criteria": "Financiamento estruturado aprovado"
+                },
+                {
+                    "id": "homologate",
+                    "name": "Instalação Industrial e Conexão MT",
+                    "goal": "Conectar em média tensão sem interrupção",
+                    "ui_components": [
+                        "industrial_installation_project_manager",
+                        "utility_mt_coordination_portal"
+                    ],
+                    "user_actions": [
+                        "coordinate_mt_installation",
+                        "validate_utility_mt_approval"
+                    ],
+                    "kpis": [
+                        "mt_installation_lead_time",
+                        "mt_homologation_success_rate"
+                    ],
+                    "success_criteria": "Sistema MT instalado e conectado"
+                },
+                {
+                    "id": "post_sale",
+                    "name": "Monitoramento Industrial Avançado",
+                    "goal": "Acompanhar otimização tarifária e qualidade de energia",
+                    "ui_components": [
+                        "industrial_energy_management_system",
+                        "demand_charge_tracker",
+                        "power_quality_monitor"
+                    ],
+                    "user_actions": [
+                        "monitor_demand_charges",
+                        "track_power_quality",
+                        "optimize_industrial_operations"
+                    ],
+                    "kpis": [
+                        "industrial_dashboard_engagement",
+                        "demand_optimization_tracking"
+                    ],
+                    "success_criteria": "Indústria otimiza operação com monitoramento avançado",
+                    "upsell_opportunities": [
+                        "Baterias para resposta a demanda",
+                        "Sistemas de gestão de energia (EMS)",
+                        "Expansão de potência"
+                    ]
+                }
+            ],
+            "risks": [
+                "Complexidade tarifária dificulta compreensão",
+                "Demanda contratada não otimizada",
+                "Interrupção crítica de operação industrial"
+            ],
+            "telemetry_events": [
+                "view_industrial_journey",
+                "calculate_industrial_roi",
+                "analyze_demand_charges",
+                "configure_industrial_system",
+                "request_structured_financing"
+            ],
+            "messaging": {
+                "value_prop": "Otimize demanda contratada e reduza custos em até 70%",
+                "social_proof": "Indústrias já economizam milhões por ano",
+                "risk_mitigation": "Projeto customizado com engenharia especializada"
+            }
+        },
+        {
+            "journey_key": "B1_residencial_autoconsumo_remoto",
+            "profile": {
+                "classe": "B1",
+                "tarifa": "Convencional",
+                "modalidade_scee": "autoconsumo_remoto",
+                "persona": "Proprietário sem telhado adequado, busca geração remota"
+            },
+            "stages": [
+                {
+                    "id": "discover",
+                    "name": "Descoberta de Geração Remota",
+                    "goal": "Entender viabilidade de geração em local alternativo",
+                    "ui_components": [
+                        "remote_generation_explainer",
+                        "location_matcher",
+                        "remote_roi_calculator"
+                    ],
+                    "user_actions": [
+                        "understand_remote_generation",
+                        "search_available_locations",
+                        "calculate_remote_savings"
+                    ],
+                    "kpis": [
+                        "remote_explainer_engagement",
+                        "location_search_rate"
+                    ],
+                    "success_criteria": "Usuário entende geração remota e viabilidade"
+                },
+                {
+                    "id": "configure",
+                    "name": "Configuração de Geração Remota",
+                    "goal": "Configurar sistema em local remoto",
+                    "ui_components": [
+                        "remote_location_selector",
+                        "transmission_fee_calculator",
+                        "remote_system_configurator"
+                    ],
+                    "user_actions": [
+                        "select_remote_location",
+                        "calculate_transmission_fees",
+                        "configure_remote_system"
+                    ],
+                    "kpis": [
+                        "remote_configuration_completion",
+                        "transmission_fee_acceptance_rate"
+                    ],
+                    "success_criteria": "Sistema remoto configurado"
+                },
+                {
+                    "id": "finance",
+                    "name": "Financiamento de Geração Remota",
+                    "goal": "Financiar sistema remoto",
+                    "ui_components": [
+                        "remote_financing_simulator",
+                        "subscription_model_option"
+                    ],
+                    "user_actions": [
+                        "simulate_remote_financing",
+                        "evaluate_subscription_model"
+                    ],
+                    "kpis": [
+                        "remote_financing_request_rate",
+                        "subscription_preference_rate"
+                    ],
+                    "success_criteria": "Financiamento remoto aprovado"
+                },
+                {
+                    "id": "homologate",
+                    "name": "Instalação Remota e Conexão",
+                    "goal": "Instalar em local remoto e conectar à UC do cliente",
+                    "ui_components": [
+                        "remote_installation_tracker",
+                        "utility_remote_coordination"
+                    ],
+                    "user_actions": [
+                        "track_remote_installation",
+                        "validate_remote_connection"
+                    ],
+                    "kpis": [
+                        "remote_installation_lead_time",
+                        "remote_connection_success_rate"
+                    ],
+                    "success_criteria": "Sistema remoto conectado à UC do cliente"
+                },
+                {
+                    "id": "post_sale",
+                    "name": "Monitoramento de Geração Remota",
+                    "goal": "Acompanhar créditos de energia",
+                    "ui_components": [
+                        "remote_credit_tracker",
+                        "transmission_fee_monitor"
+                    ],
+                    "user_actions": [
+                        "monitor_energy_credits",
+                        "track_transmission_costs"
+                    ],
+                    "kpis": [
+                        "remote_dashboard_engagement",
+                        "credit_utilization_rate"
+                    ],
+                    "success_criteria": "Cliente acompanha créditos e economia líquida"
+                }
+            ],
+            "risks": [
+                "Taxas de transmissão reduzem economia",
+                "Complexidade regulatória de geração remota",
+                "Disponibilidade limitada de locais"
+            ],
+            "telemetry_events": [
+                "view_remote_journey",
+                "search_remote_locations",
+                "calculate_remote_savings",
+                "configure_remote_system"
+            ],
+            "messaging": {
+                "value_prop": "Gere energia solar mesmo sem telhado próprio",
+                "social_proof": "Milhares já economizam com geração remota",
+                "risk_mitigation": "Locais pré-aprovados e homologados"
+            }
+        },
+        {
+            "journey_key": "B1_residencial_multiplas_ucs",
+            "profile": {
+                "classe": "B1",
+                "tarifa": "Convencional",
+                "modalidade_scee": "multiplas_ucs",
+                "persona": "Síndico/proprietário de condomínio, múltiplas unidades consumidoras"
+            },
+            "stages": [
+                {
+                    "id": "discover",
+                    "name": "Descoberta de Geração para Condomínios",
+                    "goal": "Entender viabilidade para múltiplas UCs",
+                    "ui_components": [
+                        "condo_generation_explainer",
+                        "multi_uc_roi_calculator",
+                        "condo_case_studies"
+                    ],
+                    "user_actions": [
+                        "understand_multi_uc_generation",
+                        "calculate_condo_savings",
+                        "view_condo_cases"
+                    ],
+                    "kpis": [
+                        "condo_explainer_engagement",
+                        "multi_uc_calculator_usage"
+                    ],
+                    "success_criteria": "Síndico entende viabilidade para condomínio"
+                },
+                {
+                    "id": "configure",
+                    "name": "Configuração para Múltiplas UCs",
+                    "goal": "Dimensionar sistema para todas as unidades",
+                    "ui_components": [
+                        "multi_uc_consumption_aggregator",
+                        "credit_distribution_configurator",
+                        "condo_system_configurator"
+                    ],
+                    "user_actions": [
+                        "aggregate_uc_consumption",
+                        "configure_credit_distribution",
+                        "dimension_condo_system"
+                    ],
+                    "kpis": [
+                        "multi_uc_configuration_completion",
+                        "credit_distribution_acceptance"
+                    ],
+                    "success_criteria": "Sistema para múltiplas UCs configurado"
+                },
+                {
+                    "id": "finance",
+                    "name": "Financiamento Coletivo",
+                    "goal": "Estruturar financiamento compartilhado",
+                    "ui_components": [
+                        "collective_financing_simulator",
+                        "uc_contribution_calculator"
+                    ],
+                    "user_actions": [
+                        "simulate_collective_financing",
+                        "calculate_uc_contributions"
+                    ],
+                    "kpis": [
+                        "collective_financing_request_rate",
+                        "uc_participation_rate"
+                    ],
+                    "success_criteria": "Financiamento coletivo aprovado"
+                },
+                {
+                    "id": "homologate",
+                    "name": "Instalação em Condomínio",
+                    "goal": "Instalar sistema compartilhado",
+                    "ui_components": [
+                        "condo_installation_coordinator",
+                        "multi_uc_utility_approval"
+                    ],
+                    "user_actions": [
+                        "coordinate_condo_installation",
+                        "validate_multi_uc_approval"
+                    ],
+                    "kpis": [
+                        "condo_installation_lead_time",
+                        "multi_uc_approval_success_rate"
+                    ],
+                    "success_criteria": "Sistema compartilhado instalado e aprovado"
+                },
+                {
+                    "id": "post_sale",
+                    "name": "Monitoramento de Condomínio",
+                    "goal": "Acompanhar distribuição de créditos",
+                    "ui_components": [
+                        "condo_credit_distribution_dashboard",
+                        "uc_savings_tracker"
+                    ],
+                    "user_actions": [
+                        "monitor_credit_distribution",
+                        "track_uc_savings"
+                    ],
+                    "kpis": [
+                        "condo_dashboard_engagement",
+                        "uc_satisfaction_score"
+                    ],
+                    "success_criteria": "Condomínio acompanha distribuição e economia"
+                }
+            ],
+            "risks": [
+                "Coordenação entre múltiplos proprietários",
+                "Distribuição de créditos complexa",
+                "Aprovação em assembleia"
+            ],
+            "telemetry_events": [
+                "view_condo_journey",
+                "calculate_multi_uc_savings",
+                "configure_condo_system",
+                "request_collective_financing"
+            ],
+            "messaging": {
+                "value_prop": "Energia solar para todo o condomínio com economia compartilhada",
+                "social_proof": "Condomínios já economizam milhares por mês",
+                "risk_mitigation": "Gestão simplificada de créditos por unidade"
+            }
+        },
+        {
+            "journey_key": "B3_comercial_geracao_compartilhada",
+            "profile": {
+                "classe": "B3",
+                "tarifa": "Convencional",
+                "modalidade_scee": "geracao_compartilhada",
+                "persona": "Cooperativa/consórcio de pequenos comerciantes"
+            },
+            "stages": [
+                {
+                    "id": "discover",
+                    "name": "Descoberta de Geração Compartilhada",
+                    "goal": "Entender modelo cooperativo de energia solar",
+                    "ui_components": [
+                        "shared_generation_explainer",
+                        "cooperative_roi_calculator",
+                        "cooperative_case_studies"
+                    ],
+                    "user_actions": [
+                        "understand_shared_generation",
+                        "calculate_cooperative_savings",
+                        "view_cooperative_cases"
+                    ],
+                    "kpis": [
+                        "shared_explainer_engagement",
+                        "cooperative_calculator_usage"
+                    ],
+                    "success_criteria": "Cooperativa entende modelo compartilhado"
+                },
+                {
+                    "id": "configure",
+                    "name": "Configuração Cooperativa",
+                    "goal": "Dimensionar sistema para cooperativa",
+                    "ui_components": [
+                        "cooperative_consumption_aggregator",
+                        "member_allocation_configurator",
+                        "cooperative_system_configurator"
+                    ],
+                    "user_actions": [
+                        "aggregate_member_consumption",
+                        "configure_member_allocation",
+                        "dimension_cooperative_system"
+                    ],
+                    "kpis": [
+                        "cooperative_configuration_completion",
+                        "member_allocation_acceptance"
+                    ],
+                    "success_criteria": "Sistema cooperativo configurado"
+                },
+                {
+                    "id": "finance",
+                    "name": "Financiamento Cooperativo",
+                    "goal": "Estruturar financiamento compartilhado",
+                    "ui_components": [
+                        "cooperative_financing_simulator",
+                        "member_contribution_calculator"
+                    ],
+                    "user_actions": [
+                        "simulate_cooperative_financing",
+                        "calculate_member_contributions"
+                    ],
+                    "kpis": [
+                        "cooperative_financing_request_rate",
+                        "member_participation_rate"
+                    ],
+                    "success_criteria": "Financiamento cooperativo aprovado"
+                },
+                {
+                    "id": "homologate",
+                    "name": "Instalação Cooperativa",
+                    "goal": "Instalar sistema compartilhado",
+                    "ui_components": [
+                        "cooperative_installation_coordinator",
+                        "shared_utility_approval"
+                    ],
+                    "user_actions": [
+                        "coordinate_cooperative_installation",
+                        "validate_shared_approval"
+                    ],
+                    "kpis": [
+                        "cooperative_installation_lead_time",
+                        "shared_approval_success_rate"
+                    ],
+                    "success_criteria": "Sistema compartilhado instalado e aprovado"
+                },
+                {
+                    "id": "post_sale",
+                    "name": "Monitoramento Cooperativo",
+                    "goal": "Acompanhar distribuição cooperativa",
+                    "ui_components": [
+                        "cooperative_credit_dashboard",
+                        "member_savings_tracker"
+                    ],
+                    "user_actions": [
+                        "monitor_cooperative_distribution",
+                        "track_member_savings"
+                    ],
+                    "kpis": [
+                        "cooperative_dashboard_engagement",
+                        "member_satisfaction_score"
+                    ],
+                    "success_criteria": "Cooperativa acompanha distribuição e economia"
+                }
+            ],
+            "risks": [
+                "Coordenação entre múltiplos membros",
+                "Governança cooperativa",
+                "Distribuição de créditos complexa"
+            ],
+            "telemetry_events": [
+                "view_cooperative_journey",
+                "calculate_shared_savings",
+                "configure_cooperative_system",
+                "request_cooperative_financing"
+            ],
+            "messaging": {
+                "value_prop": "Energia solar compartilhada para sua cooperativa",
+                "social_proof": "Cooperativas já economizam milhares por mês",
+                "risk_mitigation": "Gestão simplificada de créditos cooperativos"
+            }
+        }
+    ],
+    "meta": {
+        "total_journeys": 8,
+        "classes_covered": [
+            "B1",
+            "B2",
+            "B3",
+            "A"
+        ],
+        "tarifas_covered": [
+            "Convencional",
+            "Branca",
+            "Azul"
+        ],
+        "modalidades_covered": [
+            "autoconsumo_local",
+            "autoconsumo_remoto",
+            "multiplas_ucs",
+            "geracao_compartilhada"
+        ],
+        "total_stages": 5,
+        "total_telemetry_events": 80
+    }
+}
