@@ -23,9 +23,11 @@ Implementação completa de otimizações React e sistema de profiling para o Ye
 ### 1.1 Componentes Otimizados
 
 #### Button Component
+
 **Arquivo**: `src/lib/design-system/components/Button.tsx`
 
 **Otimizações Aplicadas**:
+
 - ✅ `React.memo` - Evita re-renders desnecessários
 - ✅ `useMemo` - Memoização de className computado
 - ✅ Hoisting de constante `MEDUSA_VARIANT_MAP`
@@ -35,9 +37,11 @@ Implementação completa de otimizações React e sistema de profiling para o Ye
 **Impacto Esperado**: Redução de 50-70% em re-renders
 
 #### PanelCard Component
+
 **Arquivo**: `src/lib/design-system/components/PanelCard.tsx`
 
 **Otimizações Aplicadas**:
+
 - ✅ `React.memo` - Evita re-renders desnecessários
 - ✅ `useCallback` - Handlers estáveis (handleViewDetails, handleAddToQuote)
 - ✅ `useMemo` - Memoização de formatPrice
@@ -48,25 +52,31 @@ Implementação completa de otimizações React e sistema de profiling para o Ye
 **Impacto Esperado**: Redução de 60-80% em re-renders
 
 #### Input Component
+
 **Arquivo**: `src/lib/design-system/components/Input.tsx`
 
 **Otimizações Aplicadas**:
+
 - ✅ `React.memo` - Evita re-renders desnecessários
 - ✅ `forwardRef` - Suporte a refs externas
 - ✅ CVA para variantes type-safe
 
 #### Select Component
+
 **Arquivo**: `src/lib/design-system/components/Select.tsx`
 
 **Otimizações Aplicadas**:
+
 - ✅ `React.memo` - Evita re-renders desnecessários
 - ✅ `forwardRef` - Suporte a refs externas
 - ✅ Size variants (sm, md, lg)
 
 #### Badge Component
+
 **Arquivo**: `src/lib/design-system/components/Badge.tsx`
 
 **Otimizações Aplicadas**:
+
 - ✅ `React.memo` - Evita re-renders desnecessários
 - ✅ CVA para variantes type-safe
 - ✅ Yello brand variants (yellow, orange, magenta)
@@ -74,6 +84,7 @@ Implementação completa de otimizações React e sistema de profiling para o Ye
 ### 1.2 Utilities Criadas
 
 #### formatPrice Function
+
 **Arquivo**: `src/lib/utils.ts`
 
 ```typescript
@@ -95,15 +106,18 @@ export function formatPrice(price: number, inCents = false): string {
 ### 2.1 Ferramentas de Desenvolvimento
 
 #### withRenderCounter HOC
+
 **Arquivo**: `src/lib/design-system/dev/withRenderCounter.tsx`
 
 **Funcionalidade**:
+
 - Conta renders de componente
 - Logs no console (formato: `[render] ComponentName: N`)
 - Apenas ativo em desenvolvimento
 - Retorna componente wrapped com React.memo
 
 **Exemplo de Uso**:
+
 ```tsx
 const MyComponent = React.memo(MyComponentInner)
 
@@ -113,9 +127,11 @@ export default process.env.NODE_ENV === 'development'
 ```
 
 #### ProfilerWrapper Component
+
 **Arquivo**: `src/lib/design-system/dev/ProfilerWrapper.tsx`
 
 **Funcionalidade**:
+
 - Wrapper do React Profiler API
 - Coleta de métricas (actualDuration, baseDuration, phase)
 - Agregação automática de estatísticas
@@ -123,6 +139,7 @@ export default process.env.NODE_ENV === 'development'
 - Logs coloridos no console
 
 **Métricas Coletadas**:
+
 ```typescript
 {
   id: string
@@ -135,6 +152,7 @@ export default process.env.NODE_ENV === 'development'
 ```
 
 **Estatísticas Agregadas**:
+
 ```typescript
 {
   id: string
@@ -149,9 +167,11 @@ export default process.env.NODE_ENV === 'development'
 ```
 
 #### ProfilingControls Component
+
 **Arquivo**: `src/lib/design-system/dev/ProfilingControls.tsx`
 
 **Funcionalidade**:
+
 - Painel flutuante (canto inferior direito)
 - Estatísticas em tempo real
 - Top 5 componentes mais lentos
@@ -160,6 +180,7 @@ export default process.env.NODE_ENV === 'development'
 - Apenas visível em desenvolvimento
 
 **UI Features**:
+
 - ✅ Toggle visibility (📊 Profiler button)
 - ✅ Summary stats (components tracked, total renders, total duration)
 - ✅ Slowest components list with avg duration
@@ -189,9 +210,11 @@ downloadProfileData(format: 'json' | 'csv' | 'flamegraph'): void
 ```
 
 ### 2.3 Helper Script
+
 **Arquivo**: `profiling-helper.js`
 
 **Funções para Console do Navegador**:
+
 ```javascript
 exportProfilingJSON()          // Exporta JSON
 exportProfilingCSV()           // Exporta CSV
@@ -207,38 +230,48 @@ endProfilingSession()          // Finaliza sessão
 ## 🎯 Fase 3: Instrumentação de Páginas (Completa)
 
 ### 3.1 Layout Principal
+
 **Arquivo**: `src/app/[countryCode]/(main)/layout.tsx`
 
 **Instrumentação**:
+
 - ✅ Import de `ProfilingControls`
 - ✅ Adicionado ao JSX do layout
 - ✅ Disponível em todas as páginas do app
 
 ### 3.2 Página de Produto
+
 **Arquivo**: `src/app/[countryCode]/(main)/products/[handle]/page.tsx`
 
 **Instrumentação**:
+
 - ✅ Wrapped com `<ProfilerWrapper id="ProductPage">`
 - ✅ Métricas: Render de ProductTemplate
 
 ### 3.3 Página de Coleção
+
 **Arquivo**: `src/app/[countryCode]/(main)/collections/[handle]/page.tsx`
 
 **Instrumentação**:
+
 - ✅ Wrapped com `<ProfilerWrapper id="CollectionPage">`
 - ✅ Métricas: Render de CollectionTemplate com listagem
 
 ### 3.4 Página de Categoria
+
 **Arquivo**: `src/app/[countryCode]/(main)/categories/[...category]/page.tsx`
 
 **Instrumentação**:
+
 - ✅ Wrapped com `<ProfilerWrapper id="CategoryPage">`
 - ✅ Métricas: Render de CategoryTemplate com filtros
 
 ### 3.5 Página de Carrinho
+
 **Arquivo**: `src/app/[countryCode]/(main)/cart/page.tsx`
 
 **Instrumentação**:
+
 - ✅ Wrapped com `<ProfilerWrapper id="CartPage">`
 - ✅ Métricas: Render de CartTemplate com itens
 
@@ -258,9 +291,11 @@ endProfilingSession()          // Finaliza sessão
 | **Este Documento** | `REACT_OPTIMIZATION_COMPLETE.md` | Implementação completa | ✅ |
 
 ### 4.2 README Atualizado
+
 **Arquivo**: `README.md`
 
 **Adições**:
+
 - ✅ Seção "Performance Profiling 📊"
 - ✅ Quick start command
 - ✅ Links para toda documentação
@@ -283,16 +318,19 @@ endProfilingSession()          // Finaliza sessão
 ### Métricas Esperadas Após Otimizações
 
 **Button Component**:
+
 - Antes: ~15-20 renders por navegação
 - Depois: ~3-5 renders por navegação
 - Redução: 70-75%
 
 **PanelCard Component**:
+
 - Antes: ~30-40 renders em lista de 10 itens
 - Depois: ~10-12 renders em lista de 10 itens
 - Redução: 67-70%
 
 **Páginas Instrumentadas**:
+
 - ProductPage: ~45ms mount, ~12ms update (esperado)
 - CollectionPage: ~120ms mount, ~30ms update (esperado)
 - CategoryPage: ~140ms mount, ~35ms update (esperado)
@@ -305,17 +343,20 @@ endProfilingSession()          // Finaliza sessão
 ### Início Rápido (3 passos)
 
 1. **Iniciar dev server**:
+
 ```powershell
 cd YSH_storefront
 npm run dev
 ```
 
 2. **Abrir aplicação**:
+
 ```
 http://localhost:3000
 ```
 
 3. **Ativar profiling**:
+
 - Clicar no botão "📊 Profiler" (canto inferior direito)
 - Navegar pelas páginas
 - Ver métricas em tempo real
@@ -349,6 +390,7 @@ http://localhost:3000
 ## 🔧 Build Status
 
 ### Último Build
+
 ```
 ✓ Compiled successfully in 12.5s
 ✓ Generating static pages (29/29)
@@ -358,6 +400,7 @@ http://localhost:3000
 **Status**: ✅ Compilação bem-sucedida
 
 **Notas**:
+
 - ⚠️ Warnings esperados sobre workspace root (múltiplos lockfiles)
 - ⚠️ ECONNREFUSED esperado quando backend Medusa não está rodando
 - ✅ Todos os componentes de profiling compilam sem erros TypeScript
@@ -407,6 +450,7 @@ YSH_storefront/
 ## ✅ Checklist de Implementação
 
 ### Otimizações React
+
 - [x] Button component otimizado (memo, useMemo, hoisting)
 - [x] PanelCard component otimizado (memo, useCallback, useMemo, Image)
 - [x] Input component otimizado (memo, forwardRef)
@@ -417,6 +461,7 @@ YSH_storefront/
 - [x] Build compila sem erros
 
 ### Sistema de Profiling
+
 - [x] ProfilerWrapper component criado
 - [x] ProfilingControls component criado
 - [x] Dev tools index criado
@@ -426,6 +471,7 @@ YSH_storefront/
 - [x] Helper script criado
 
 ### Instrumentação
+
 - [x] Layout principal instrumentado (ProfilingControls)
 - [x] ProductPage instrumentada
 - [x] CollectionPage instrumentada
@@ -433,6 +479,7 @@ YSH_storefront/
 - [x] CartPage instrumentada
 
 ### Documentação
+
 - [x] PROFILING_INDEX.md criado
 - [x] PROFILING_QUICKSTART.md criado
 - [x] PROFILING_GUIDE.md criado
@@ -447,24 +494,28 @@ YSH_storefront/
 ## 🎯 Próximos Passos Recomendados
 
 ### Imediato (Hoje)
+
 - [ ] Executar primeira sessão de profiling
 - [ ] Navegar por todas páginas instrumentadas
 - [ ] Exportar baseline de métricas
 - [ ] Revisar console logs e painel
 
 ### Curto Prazo (Esta Semana)
+
 - [ ] Analisar flamegraphs exportados
 - [ ] Identificar top 5 hotspots de performance
 - [ ] Documentar findings iniciais
 - [ ] Priorizar otimizações adicionais
 
 ### Médio Prazo (Próximas 2 Semanas)
+
 - [ ] Implementar virtualização em listas longas (react-window)
 - [ ] Code splitting de componentes pesados
 - [ ] Adicionar Suspense boundaries
 - [ ] Medir Web Vitals (LCP, FID, CLS)
 
 ### Longo Prazo (Próximo Mês)
+
 - [ ] Testes de performance automatizados
 - [ ] Performance budgets no CI/CD
 - [ ] Lighthouse CI integration
@@ -475,6 +526,7 @@ YSH_storefront/
 ## 🔗 Recursos
 
 ### Documentação Interna
+
 - [PROFILING_INDEX.md](./PROFILING_INDEX.md) - Índice central
 - [PROFILING_QUICKSTART.md](./PROFILING_QUICKSTART.md) - Quick start
 - [PROFILING_GUIDE.md](./PROFILING_GUIDE.md) - Guia completo
@@ -482,6 +534,7 @@ YSH_storefront/
 - [PROFILING_EXECUTIVE_SUMMARY.md](./PROFILING_EXECUTIVE_SUMMARY.md) - Executive summary
 
 ### Links Externos
+
 - [React Profiler API](https://react.dev/reference/react/Profiler)
 - [Speedscope](https://www.speedscope.app/)
 - [Chrome DevTools Performance](https://developer.chrome.com/docs/devtools/performance/)
