@@ -1,0 +1,61 @@
+journey_key,stage,hypothesis_id,hypothesis_type,variation,description,expected_impact,expected_evidence,metric,sample_size,confidence_level,priority
+B1_residencial_convencional_autoconsumo_local,discover,H001,copy,A,"Hero headline: 'Reduza sua conta de luz em até 95%'",Increase calculator CTA click rate by 15%,Higher engagement with ROI value prop,ctr_calculator,1000,medium,P1
+B1_residencial_convencional_autoconsumo_local,discover,H001,copy,B,"Hero headline: 'Energia solar própria a partir de R$ 450/mês'",Increase calculator CTA click rate by 20%,Lower barrier with financing focus,ctr_calculator,1000,medium,P1
+B1_residencial_convencional_autoconsumo_local,discover,H002,layout,A,ROI calculator above the fold (inline hero),Increase calculator completion by 25%,Immediate access to value calculation,calculator_completion_rate,1200,high,P1
+B1_residencial_convencional_autoconsumo_local,discover,H002,layout,B,ROI calculator in dedicated section below hero,Increase page scroll depth,Better context before calculation,avg_scroll_depth,1200,medium,P2
+B1_residencial_convencional_autoconsumo_local,configure,H003,flow,A,Configurator: 4 steps (Consumo → Instalação → Equipamentos → Revisão),Increase configurator completion by 30%,Progressive disclosure reduces cognitive load,configurator_completion_rate,800,high,P1
+B1_residencial_convencional_autoconsumo_local,configure,H003,flow,B,Configurator: 2 steps (Perfil → Equipamentos),Increase configurator completion by 40%,Fewer steps = higher completion,configurator_completion_rate,800,medium,P2
+B1_residencial_convencional_autoconsumo_local,configure,H004,copy,A,"CTA: 'Adicionar ao Carrinho'",Establish e-commerce familiarity,Standard e-commerce pattern,add_to_cart_rate,1000,high,P1
+B1_residencial_convencional_autoconsumo_local,configure,H004,copy,B,"CTA: 'Solicitar Proposta'",Reduce purchase anxiety,Less commitment pressure,add_to_cart_rate,1000,medium,P2
+B1_residencial_convencional_autoconsumo_local,configure,H005,feature,A,OCR upload enabled (fatura PDF/image),Increase data accuracy by 50%,Automated data extraction,ocr_usage_rate,600,high,P1
+B1_residencial_convencional_autoconsumo_local,configure,H005,feature,B,Manual input only,Baseline for OCR comparison,manual_input_rate,600,high,P1
+B1_residencial_convencional_autoconsumo_local,finance,H006,layout,A,Financing simulator on PDP (embedded),Increase financing inquiry by 35%,In-context financing access,financing_request_rate,800,high,P1
+B1_residencial_convencional_autoconsumo_local,finance,H006,layout,B,Financing simulator as separate page,Baseline for embedded comparison,financing_request_rate,800,medium,P2
+B1_residencial_convencional_autoconsumo_local,finance,H007,copy,A,"Comparison chart: 'Parcela (R$ 450) vs Conta Atual (R$ 850)'",Increase financing approval rate by 20%,Visual clarity of net savings,financing_approval_rate,1000,high,P1
+B1_residencial_convencional_autoconsumo_local,finance,H007,copy,B,"Text: 'Economia líquida: R$ 400/mês'",Baseline for visual comparison,financing_approval_rate,1000,medium,P2
+B1_residencial_tarifa_branca_autoconsumo_local,discover,H008,feature,A,Tariff comparison widget (Convencional vs Branca),Increase tariff optimization awareness by 40%,Educate about tariff alternatives,tariff_comparison_engagement,500,high,P1
+B1_residencial_tarifa_branca_autoconsumo_local,discover,H008,feature,B,No tariff comparison (baseline),Measure impact of tariff education,tariff_comparison_engagement,500,medium,P2
+B1_residencial_tarifa_branca_autoconsumo_local,configure,H009,badge,A,"Badge: 'Otimizado para Tarifa Branca'",Increase battery attachment rate by 25%,Highlight tariff-specific optimization,battery_attachment_rate,400,high,P1
+B1_residencial_tarifa_branca_autoconsumo_local,configure,H009,badge,B,No badge (baseline),Measure badge impact on upsell,battery_attachment_rate,400,medium,P2
+B2_rural_convencional_autoconsumo_local,discover,H010,copy,A,"Value prop: 'Reduza custos de irrigação em até 90%'",Increase rural engagement by 30%,Operational cost focus for B2,engagement_time_hero,300,high,P1
+B2_rural_convencional_autoconsumo_local,discover,H010,copy,B,"Value prop: 'Energia solar para propriedades rurais'",Baseline for operational focus,engagement_time_hero,300,medium,P2
+B2_rural_convencional_autoconsumo_local,finance,H011,feature,A,PRONAF eligibility checker (automated),Increase PRONAF application rate by 50%,Immediate eligibility feedback,pronaf_application_rate,200,high,P1
+B2_rural_convencional_autoconsumo_local,finance,H011,feature,B,Manual PRONAF inquiry (contact form),Baseline for automation impact,pronaf_application_rate,200,medium,P2
+B3_comercial_convencional_autoconsumo_local,discover,H012,copy,A,"Value prop: 'Reduza custos operacionais em até 80%'",Increase commercial engagement by 25%,Business case focus for B3,engagement_time_hero,400,high,P1
+B3_comercial_convencional_autoconsumo_local,discover,H012,copy,B,"Value prop: 'Aumente competitividade com energia solar'",Test competitiveness angle,engagement_time_hero,400,medium,P2
+B3_comercial_convencional_autoconsumo_local,configure,H013,feature,A,Tax benefit estimator (embedded in ROI),Increase commercial conversion by 30%,Financial incentives visibility,commercial_conversion_rate,300,high,P1
+B3_comercial_convencional_autoconsumo_local,configure,H013,feature,B,No tax benefit estimator (baseline),Measure tax benefit impact,commercial_conversion_rate,300,medium,P2
+B3_comercial_convencional_autoconsumo_local,finance,H014,layout,A,PPA vs CAPEX comparison (side-by-side),Increase PPA inquiry rate by 40%,OPEX model visibility for enterprises,ppa_inquiry_rate,250,high,P1
+B3_comercial_convencional_autoconsumo_local,finance,H014,layout,B,CAPEX only (baseline),Measure PPA awareness impact,ppa_inquiry_rate,250,medium,P2
+A_media_tensao_azul_autoconsumo_local,discover,H015,copy,A,"Value prop: 'Otimize demanda contratada e reduza custos em até 70%'",Increase industrial engagement by 35%,Demand charge focus for Grupo A,engagement_time_hero,100,high,P1
+A_media_tensao_azul_autoconsumo_local,discover,H015,copy,B,"Value prop: 'Energia solar para indústrias'",Baseline for demand charge focus,engagement_time_hero,100,medium,P2
+A_media_tensao_azul_autoconsumo_local,configure,H016,feature,A,Demand charge optimizer (advanced calculator),Increase industrial conversion by 45%,Complex tariff optimization for A,industrial_conversion_rate,80,high,P1
+A_media_tensao_azul_autoconsumo_local,configure,H016,feature,B,Standard ROI calculator (baseline),Measure demand optimizer impact,industrial_conversion_rate,80,medium,P2
+B1_residencial_autoconsumo_remoto,discover,H017,explainer,A,Remote generation explainer (video + infographic),Increase remote generation understanding by 50%,Educational content for complex concept,remote_explainer_engagement,400,high,P1
+B1_residencial_autoconsumo_remoto,discover,H017,explainer,B,Text-only explainer (baseline),Measure multimedia impact,remote_explainer_engagement,400,medium,P2
+B1_residencial_autoconsumo_remoto,configure,H018,layout,A,Location matcher: Map view (primary) + List view (secondary),Increase location selection by 30%,Visual location discovery,location_selection_rate,300,high,P1
+B1_residencial_autoconsumo_remoto,configure,H018,layout,B,Location matcher: List view only (baseline),Measure map visualization impact,location_selection_rate,300,medium,P2
+B1_residencial_multiplas_ucs,discover,H019,social_proof,A,Condominium case studies (3 examples),Increase multi-UC interest by 40%,Peer validation for condominiums,multi_uc_inquiry_rate,200,high,P1
+B1_residencial_multiplas_ucs,discover,H019,social_proof,B,No case studies (baseline),Measure social proof impact,multi_uc_inquiry_rate,200,medium,P2
+B1_residencial_multiplas_ucs,configure,H020,feature,A,Credit distribution configurator (visual % allocation),Increase configuration completion by 35%,Transparent credit distribution,multi_uc_configuration_completion,150,high,P1
+B1_residencial_multiplas_ucs,configure,H020,feature,B,Manual credit distribution (contact form),Measure configurator automation impact,multi_uc_configuration_completion,150,medium,P2
+B3_comercial_geracao_compartilhada,finance,H021,copy,A,"CTA: 'Iniciar Cooperativa'",Increase cooperative formation by 30%,Action-oriented language,cooperative_formation_rate,100,high,P1
+B3_comercial_geracao_compartilhada,finance,H021,copy,B,"CTA: 'Saber Mais sobre Cooperativas'",Baseline for action CTA,cooperative_formation_rate,100,medium,P2
+ALL,checkout,H022,flow,A,Checkout: 4 steps with progress bar,Increase checkout completion by 25%,Clear progress indication,checkout_completion_rate,2000,high,P1
+ALL,checkout,H022,flow,B,Checkout: Single-page form (baseline),Measure multi-step impact,checkout_completion_rate,2000,medium,P2
+ALL,checkout,H023,trust,A,Trust badges: SSL + Garantia + Certificações,Increase payment conversion by 15%,Security and quality signals,payment_success_rate,1500,high,P1
+ALL,checkout,H023,trust,B,No trust badges (baseline),Measure trust signal impact,payment_success_rate,1500,medium,P2
+ALL,post_sale,H024,feature,A,Energy monitoring dashboard (real-time),Increase dashboard engagement by 60%,Real-time data visualization,dashboard_engagement_rate,1000,high,P1
+ALL,post_sale,H024,feature,B,Energy monitoring dashboard (daily updates),Baseline for real-time impact,dashboard_engagement_rate,1000,medium,P2
+ALL,post_sale,H025,gamification,A,Loyalty program with badges (bronze/prata/ouro),Increase referral rate by 40%,Gamified engagement,referral_rate,800,medium,P2
+ALL,post_sale,H025,gamification,B,Standard loyalty program (points only),Baseline for gamification impact,referral_rate,800,low,P3
+ALL,post_sale,H026,upsell,A,Battery upsell: Conditional (tariff branca + night consumption),Increase battery attachment by 50%,Targeted upsell based on usage,battery_upsell_conversion,500,high,P1
+ALL,post_sale,H026,upsell,B,Battery upsell: Always shown (baseline),Measure conditional targeting impact,battery_upsell_conversion,500,medium,P2
+ALL,journey,H027,navigation,A,Journey stage tracker (persistent sidebar),Increase multi-stage completion by 35%,Constant progress visibility,journey_completion_rate,1200,high,P1
+ALL,journey,H027,navigation,B,Journey stage tracker (page header only),Baseline for persistent sidebar,journey_completion_rate,1200,medium,P2
+ALL,journey,H028,personalization,A,Personalized journey recommendations (AI-driven),Increase cross-journey engagement by 45%,ML-based persona matching,cross_journey_engagement,1000,medium,P2
+ALL,journey,H028,personalization,B,Static journey cards (baseline),Measure personalization impact,cross_journey_engagement,1000,low,P3
+ALL,product,H029,display,A,Product cards: Thumbnail + Title + Price + ROI badge,Increase product CTR by 30%,ROI badge as differentiator,product_ctr,2000,high,P1
+ALL,product,H029,display,B,Product cards: Thumbnail + Title + Price (baseline),Measure ROI badge impact,product_ctr,2000,medium,P2
+ALL,product,H030,comparison,A,Product comparison: Up to 4 products side-by-side,Increase comparison usage by 50%,Multi-product evaluation,comparison_tool_usage,800,high,P1
+ALL,product,H030,comparison,B,Product comparison: Up to 2 products (baseline),Measure 4-product capacity impact,comparison_tool_usage,800,medium,P2

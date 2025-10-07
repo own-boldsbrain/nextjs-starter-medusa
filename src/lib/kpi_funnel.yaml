@@ -1,0 +1,793 @@
+# KPI Funnel - YSH Marketplace Analytics
+
+version: "1.0.0"
+generated: "2025-10-07"
+framework: "Google Analytics 4 + Custom Events"
+
+# ============================================
+# FUNNEL OVERVIEW
+# ============================================
+funnel_stages:
+  - id: "view"
+    name: "Visualização"
+    description: "Usuário visualiza conteúdo (páginas, produtos, jornadas)"
+    color: "#FFCE00"  # Yello Yellow
+    
+  - id: "configure"
+    name: "Configuração"
+    description: "Usuário configura sistema ou simula economia"
+    color: "#FF6600"  # Yello Orange
+    
+  - id: "add_to_cart"
+    name: "Carrinho"
+    description: "Usuário adiciona produto ao carrinho"
+    color: "#FF0066"  # Yello Magenta
+    
+  - id: "finance"
+    name: "Financiamento"
+    description: "Usuário simula ou solicita financiamento"
+    color: "#CC0052"  # Dark Magenta
+    
+  - id: "purchase"
+    name: "Compra"
+    description: "Usuário completa checkout e realiza compra"
+    color: "#990040"  # Darker Magenta
+    
+  - id: "homologate"
+    name: "Homologação"
+    description: "Sistema instalado e homologado na distribuidora"
+    color: "#660029"  # Darkest Magenta
+    
+  - id: "onboard"
+    name: "Ativação"
+    description: "Cliente usa dashboard e monitora geração"
+    color: "#4A001E"  # Almost Black
+    
+  - id: "nps"
+    name: "Fidelização"
+    description: "Cliente recomenda, expande ou compra novamente"
+    color: "#2D0012"  # Black
+
+# ============================================
+# CONVERSION TARGETS
+# ============================================
+conversion_targets:
+  view_to_configure: 40%        # 40% of visitors calculate ROI or configure
+  configure_to_cart: 60%        # 60% of configurators add to cart
+  cart_to_finance: 50%          # 50% of cart users simulate financing
+  finance_to_purchase: 60%      # 60% of financing simulators complete purchase
+  purchase_to_homologate: 95%   # 95% of purchases reach homologation
+  homologate_to_onboard: 90%    # 90% of homologated systems activate dashboard
+  onboard_to_nps: 50%           # 50% of active users provide NPS
+  overall_conversion: 7.2%      # End-to-end (view → purchase)
+
+# ============================================
+# EVENT TAXONOMY
+# ============================================
+event_categories:
+  page_view:
+    prefix: "view_"
+    description: "Page and content views"
+    properties:
+      - name: "page_path"
+        type: "string"
+        required: true
+      - name: "page_title"
+        type: "string"
+        required: true
+      - name: "referrer"
+        type: "string"
+        required: false
+      - name: "user_type"
+        type: "string"
+        values: ["new", "returning"]
+        required: true
+        
+  interaction:
+    prefix: "click_"
+    description: "User interactions (clicks, taps, swipes)"
+    properties:
+      - name: "element_id"
+        type: "string"
+        required: true
+      - name: "element_type"
+        type: "string"
+        values: ["button", "link", "card", "image"]
+        required: true
+      - name: "element_text"
+        type: "string"
+        required: false
+        
+  calculation:
+    prefix: "calculate_"
+    description: "ROI, financing, tariff calculations"
+    properties:
+      - name: "calculator_type"
+        type: "string"
+        values: ["roi", "financing", "tariff", "demand"]
+        required: true
+      - name: "input_value"
+        type: "number"
+        required: true
+      - name: "output_value"
+        type: "number"
+        required: true
+        
+  configuration:
+    prefix: "configure_"
+    description: "System configuration and customization"
+    properties:
+      - name: "configurator_step"
+        type: "number"
+        values: [1, 2, 3, 4]
+        required: true
+      - name: "configuration_method"
+        type: "string"
+        values: ["ocr", "manual", "recommended"]
+        required: true
+      - name: "system_power_kwp"
+        type: "number"
+        required: false
+        
+  commerce:
+    prefix: "ecommerce_"
+    description: "E-commerce events (cart, checkout, purchase)"
+    properties:
+      - name: "currency"
+        type: "string"
+        default: "BRL"
+        required: true
+      - name: "value"
+        type: "number"
+        required: true
+      - name: "items"
+        type: "array"
+        required: true
+        
+  financing:
+    prefix: "financing_"
+    description: "Financing simulation and application"
+    properties:
+      - name: "financing_type"
+        type: "string"
+        values: ["banco", "pronaf", "ppa", "leasing"]
+        required: true
+      - name: "loan_amount"
+        type: "number"
+        required: true
+      - name: "installment_count"
+        type: "number"
+        required: true
+        
+  milestone:
+    prefix: "milestone_"
+    description: "Installation and homologation milestones"
+    properties:
+      - name: "milestone_name"
+        type: "string"
+        values: ["purchase", "installation_scheduled", "installation_complete", "documentation_sent", "homologation_approved"]
+        required: true
+      - name: "milestone_date"
+        type: "string"
+        format: "ISO 8601"
+        required: true
+        
+  engagement:
+    prefix: "engage_"
+    description: "Dashboard usage and post-sale engagement"
+    properties:
+      - name: "feature"
+        type: "string"
+        values: ["dashboard", "roi_tracker", "alerts", "recommendations"]
+        required: true
+      - name: "session_duration"
+        type: "number"
+        unit: "seconds"
+        required: false
+
+# ============================================
+# CRITICAL EVENTS BY FUNNEL STAGE
+# ============================================
+funnel_events:
+  # STAGE 1: VIEW (Discover)
+  - event_name: "view_home"
+    stage: "view"
+    description: "User views home page"
+    priority: "critical"
+    properties:
+      page_path: "/"
+      
+  - event_name: "view_journey_360"
+    stage: "view"
+    description: "User views journey 360º hub"
+    priority: "high"
+    properties:
+      page_path: "/journeys"
+      
+  - event_name: "view_journey_segment"
+    stage: "view"
+    description: "User views specific journey segment"
+    priority: "high"
+    properties:
+      page_path: "/journeys/{segment}"
+      segment: "{residential-b1|rural-b2|commercial-b3|medium-voltage|public-sector}"
+      
+  - event_name: "view_systems_catalog"
+    stage: "view"
+    description: "User views systems catalog"
+    priority: "medium"
+    properties:
+      page_path: "/sistemas-fotovoltaicos/{classe}"
+      classe: "{residencial-b1|rural-b2|comercial-b3|industrial-grupo-a}"
+      
+  - event_name: "view_product"
+    stage: "view"
+    description: "User views product detail page"
+    priority: "high"
+    properties:
+      page_path: "/products/{handle}"
+      product_id: "string"
+      product_name: "string"
+      product_price: "number"
+      product_category: "string"
+      
+  # STAGE 2: CONFIGURE
+  - event_name: "calculate_roi_home"
+    stage: "configure"
+    description: "User calculates ROI on home page"
+    priority: "critical"
+    properties:
+      calculator_location: "home_hero"
+      input_monthly_bill: "number"
+      output_monthly_savings: "number"
+      output_payback_years: "number"
+      
+  - event_name: "calculate_roi_pdp"
+    stage: "configure"
+    description: "User calculates ROI on product detail page"
+    priority: "high"
+    properties:
+      calculator_location: "pdp_embed"
+      product_handle: "string"
+      input_monthly_consumption: "number"
+      output_roi_estimate: "number"
+      
+  - event_name: "start_configurator"
+    stage: "configure"
+    description: "User starts system configurator wizard"
+    priority: "critical"
+    properties:
+      page_path: "/configurador/consumo"
+      
+  - event_name: "complete_configurator_step"
+    stage: "configure"
+    description: "User completes a configurator step"
+    priority: "critical"
+    properties:
+      step_number: "number (1-4)"
+      step_name: "string"
+      configuration_method: "{ocr|manual|recommended}"
+      
+  - event_name: "use_ocr_upload"
+    stage: "configure"
+    description: "User uploads bill for OCR parsing"
+    priority: "high"
+    properties:
+      file_type: "string"
+      ocr_success: "boolean"
+      extracted_consumption_kwh: "number"
+      
+  - event_name: "compare_products"
+    stage: "configure"
+    description: "User uses product comparison tool"
+    priority: "medium"
+    properties:
+      page_path: "/products/compare"
+      product_count: "number (1-4)"
+      product_handles: "array[string]"
+      
+  - event_name: "compare_tariffs"
+    stage: "configure"
+    description: "User compares tariff options"
+    priority: "medium"
+    properties:
+      page_path: "/otimizacao-expansao/comparador-tarifas"
+      current_tariff: "{convencional|branca|azul|verde}"
+      recommended_tariff: "string"
+      estimated_savings: "number"
+      
+  # STAGE 3: ADD TO CART
+  - event_name: "add_to_cart"
+    stage: "add_to_cart"
+    description: "User adds product to cart (GA4 ecommerce)"
+    priority: "critical"
+    properties:
+      currency: "BRL"
+      value: "number"
+      items:
+        - item_id: "string"
+          item_name: "string"
+          item_category: "string"
+          price: "number"
+          quantity: "number"
+          
+  - event_name: "add_configuration_to_cart"
+    stage: "add_to_cart"
+    description: "User adds custom configuration from wizard to cart"
+    priority: "critical"
+    properties:
+      configuration_id: "string"
+      system_power_kwp: "number"
+      total_value: "number"
+      items_count: "number"
+      
+  - event_name: "view_cart"
+    stage: "add_to_cart"
+    description: "User views cart"
+    priority: "high"
+    properties:
+      page_path: "/cart"
+      cart_value: "number"
+      items_count: "number"
+      
+  # STAGE 4: FINANCE
+  - event_name: "simulate_financing"
+    stage: "finance"
+    description: "User simulates financing options"
+    priority: "critical"
+    properties:
+      page_path: "/financiamento/simulador"
+      financing_type: "{banco|pronaf|ppa|leasing}"
+      loan_amount: "number"
+      down_payment_percent: "number"
+      installment_count: "number"
+      monthly_installment: "number"
+      
+  - event_name: "request_financing"
+    stage: "finance"
+    description: "User requests financing or pre-approval"
+    priority: "critical"
+    properties:
+      financing_type: "string"
+      loan_amount: "number"
+      application_status: "{initiated|submitted|approved|rejected}"
+      
+  - event_name: "check_pronaf_eligibility"
+    stage: "finance"
+    description: "B2 rural user checks PRONAF eligibility"
+    priority: "high"
+    properties:
+      page_path: "/financiamento/pronaf"
+      eligibility_result: "boolean"
+      available_lines: "array[string]"
+      
+  - event_name: "request_ppa_proposal"
+    stage: "finance"
+    description: "B3 commercial user requests PPA proposal"
+    priority: "medium"
+    properties:
+      page_path: "/financiamento/ppa"
+      system_power_kwp: "number"
+      contract_years: "number"
+      estimated_ppa_tariff: "number"
+      
+  # STAGE 5: PURCHASE (Checkout)
+  - event_name: "begin_checkout"
+    stage: "purchase"
+    description: "User starts checkout process (GA4 ecommerce)"
+    priority: "critical"
+    properties:
+      currency: "BRL"
+      value: "number"
+      items: "array"
+      
+  - event_name: "complete_checkout_step"
+    stage: "purchase"
+    description: "User completes a checkout step"
+    priority: "critical"
+    properties:
+      step_number: "number (1-4)"
+      step_name: "{address|delivery|payment|review}"
+      
+  - event_name: "add_payment_info"
+    stage: "purchase"
+    description: "User adds payment information (GA4 ecommerce)"
+    priority: "high"
+    properties:
+      payment_type: "{pix|credit_card|financing}"
+      
+  - event_name: "purchase"
+    stage: "purchase"
+    description: "User completes purchase (GA4 ecommerce)"
+    priority: "critical"
+    properties:
+      transaction_id: "string"
+      currency: "BRL"
+      value: "number"
+      tax: "number"
+      shipping: "number"
+      items: "array"
+      
+  # STAGE 6: HOMOLOGATE (Installation)
+  - event_name: "milestone_purchase_confirmed"
+    stage: "homologate"
+    description: "Purchase confirmed, installation process begins"
+    priority: "critical"
+    properties:
+      order_id: "string"
+      order_value: "number"
+      estimated_installation_date: "string"
+      
+  - event_name: "milestone_installation_scheduled"
+    stage: "homologate"
+    description: "Installation date scheduled with customer"
+    priority: "high"
+    properties:
+      order_id: "string"
+      installation_date: "string"
+      technician_assigned: "boolean"
+      
+  - event_name: "milestone_installation_complete"
+    stage: "homologate"
+    description: "System installation completed"
+    priority: "critical"
+    properties:
+      order_id: "string"
+      installation_completion_date: "string"
+      installation_lead_time_days: "number"
+      
+  - event_name: "upload_document"
+    stage: "homologate"
+    description: "User uploads homologation document"
+    priority: "high"
+    properties:
+      document_type: "{art|projeto|photos}"
+      upload_success: "boolean"
+      
+  - event_name: "milestone_documentation_sent"
+    stage: "homologate"
+    description: "All documentation sent to utility"
+    priority: "high"
+    properties:
+      order_id: "string"
+      utility_name: "string"
+      submission_date: "string"
+      
+  - event_name: "milestone_homologation_approved"
+    stage: "homologate"
+    description: "System homologated and connected to grid"
+    priority: "critical"
+    properties:
+      order_id: "string"
+      homologation_approval_date: "string"
+      homologation_lead_time_days: "number"
+      
+  # STAGE 7: ONBOARD (Post-Sale Engagement)
+  - event_name: "view_dashboard"
+    stage: "onboard"
+    description: "User views energy monitoring dashboard"
+    priority: "critical"
+    properties:
+      page_path: "/account/dashboard"
+      days_since_installation: "number"
+      
+  - event_name: "track_generation"
+    stage: "onboard"
+    description: "User views generation data"
+    priority: "high"
+    properties:
+      generation_kwh_today: "number"
+      generation_kwh_month: "number"
+      consumption_kwh_today: "number"
+      
+  - event_name: "track_savings"
+    stage: "onboard"
+    description: "User tracks accumulated savings"
+    priority: "high"
+    properties:
+      savings_brl_month: "number"
+      savings_brl_total: "number"
+      roi_percent_recovered: "number"
+      
+  - event_name: "view_roi_tracker"
+    stage: "onboard"
+    description: "User views ROI progress tracker"
+    priority: "medium"
+    properties:
+      investment_total: "number"
+      savings_accumulated: "number"
+      payback_remaining_years: "number"
+      
+  - event_name: "view_alerts"
+    stage: "onboard"
+    description: "User views system alerts/anomalies"
+    priority: "high"
+    properties:
+      alert_type: "{low_generation|anomaly|maintenance}"
+      alert_severity: "{info|warning|critical}"
+      
+  # STAGE 8: NPS (Loyalty & Expansion)
+  - event_name: "provide_nps"
+    stage: "nps"
+    description: "User provides NPS feedback"
+    priority: "critical"
+    properties:
+      nps_score: "number (0-10)"
+      nps_category: "{detractor|passive|promoter}"
+      feedback_text: "string"
+      
+  - event_name: "refer_friend"
+    stage: "nps"
+    description: "User refers friend via referral program"
+    priority: "high"
+    properties:
+      referral_method: "{email|whatsapp|link}"
+      
+  - event_name: "redeem_loyalty_points"
+    stage: "nps"
+    description: "User redeems loyalty points"
+    priority: "medium"
+    properties:
+      points_redeemed: "number"
+      reward_type: "string"
+      
+  - event_name: "request_expansion"
+    stage: "nps"
+    description: "User requests system expansion"
+    priority: "high"
+    properties:
+      current_system_kwp: "number"
+      expansion_type: "{power_increase|battery|ev_charger}"
+      
+  - event_name: "purchase_addon"
+    stage: "nps"
+    description: "User purchases addon (battery, EV charger, expansion)"
+    priority: "critical"
+    properties:
+      addon_type: "string"
+      addon_value: "number"
+
+# ============================================
+# SEGMENTATION PROPERTIES
+# ============================================
+user_properties:
+  - name: "user_class"
+    description: "Regulatory class (B1/B2/B3/A)"
+    values: ["B1", "B2", "B3", "A"]
+    
+  - name: "user_tariff"
+    description: "Current tariff type"
+    values: ["convencional", "branca", "azul", "verde"]
+    
+  - name: "user_journey"
+    description: "Primary journey persona"
+    values: ["residential", "rural", "commercial", "industrial", "public_sector"]
+    
+  - name: "user_scee_modality"
+    description: "SCEE generation modality"
+    values: ["autoconsumo_local", "autoconsumo_remoto", "multiplas_ucs", "geracao_compartilhada"]
+    
+  - name: "user_lifecycle_stage"
+    description: "Customer lifecycle stage"
+    values: ["prospect", "lead", "customer", "advocate"]
+    
+  - name: "user_system_installed"
+    description: "Whether user has system installed"
+    type: "boolean"
+    
+  - name: "user_installation_date"
+    description: "Date of system installation"
+    type: "date"
+
+# ============================================
+# KPI DEFINITIONS
+# ============================================
+kpis:
+  # Acquisition KPIs
+  - name: "traffic_sources"
+    description: "Traffic by source (organic, paid, referral, direct)"
+    calculation: "COUNT(DISTINCT user_id) GROUP BY source"
+    target: "10,000 monthly visitors"
+    
+  - name: "bounce_rate"
+    description: "% of single-page sessions"
+    calculation: "COUNT(sessions with 1 page) / COUNT(total sessions)"
+    target: "<40%"
+    
+  - name: "avg_session_duration"
+    description: "Average time spent per session"
+    calculation: "SUM(session_duration) / COUNT(sessions)"
+    target: ">3 minutes"
+    
+  # Activation KPIs
+  - name: "calculator_usage_rate"
+    description: "% of visitors who use ROI calculator"
+    calculation: "COUNT(calculate_roi_*) / COUNT(view_home)"
+    target: ">80%"
+    
+  - name: "calculator_completion_rate"
+    description: "% of calculator starts that complete"
+    calculation: "COUNT(calculate_roi_* with result) / COUNT(calculate_roi_* start)"
+    target: ">70%"
+    
+  - name: "configurator_start_rate"
+    description: "% of visitors who start configurator"
+    calculation: "COUNT(start_configurator) / COUNT(DISTINCT user_id)"
+    target: ">40%"
+    
+  - name: "configurator_completion_rate"
+    description: "% of configurator starts that complete all steps"
+    calculation: "COUNT(complete_configurator_step[4]) / COUNT(start_configurator)"
+    target: ">50%"
+    
+  - name: "ocr_usage_rate"
+    description: "% of configurators that use OCR upload"
+    calculation: "COUNT(use_ocr_upload) / COUNT(start_configurator)"
+    target: ">60%"
+    
+  # Conversion KPIs
+  - name: "add_to_cart_rate"
+    description: "% of product views that add to cart"
+    calculation: "COUNT(add_to_cart) / COUNT(view_product)"
+    target: ">60%"
+    
+  - name: "cart_abandonment_rate"
+    description: "% of carts that don't convert to purchase"
+    calculation: "1 - (COUNT(purchase) / COUNT(add_to_cart))"
+    target: "<70%"
+    
+  - name: "financing_request_rate"
+    description: "% of cart users who request financing"
+    calculation: "COUNT(request_financing) / COUNT(view_cart)"
+    target: ">50%"
+    
+  - name: "financing_approval_rate"
+    description: "% of financing requests approved"
+    calculation: "COUNT(request_financing[status=approved]) / COUNT(request_financing)"
+    target: ">70%"
+    
+  - name: "checkout_completion_rate"
+    description: "% of checkout starts that complete"
+    calculation: "COUNT(purchase) / COUNT(begin_checkout)"
+    target: ">30%"
+    
+  - name: "overall_conversion_rate"
+    description: "End-to-end conversion (view → purchase)"
+    calculation: "COUNT(purchase) / COUNT(DISTINCT user_id)"
+    target: ">7.2%"
+    
+  # Revenue KPIs
+  - name: "average_order_value"
+    description: "Average purchase value"
+    calculation: "SUM(purchase.value) / COUNT(purchase)"
+    target: ">R$ 25,000"
+    
+  - name: "revenue_per_visitor"
+    description: "Revenue divided by unique visitors"
+    calculation: "SUM(purchase.value) / COUNT(DISTINCT user_id)"
+    target: ">R$ 1,800"
+    
+  - name: "upsell_rate"
+    description: "% of purchases with upsells (battery, EV, expansion)"
+    calculation: "COUNT(purchase with upsell items) / COUNT(purchase)"
+    target: ">25%"
+    
+  # Installation & Homologation KPIs
+  - name: "installation_lead_time"
+    description: "Days from purchase to installation complete"
+    calculation: "AVG(milestone_installation_complete.date - milestone_purchase_confirmed.date)"
+    target: "<30 days"
+    
+  - name: "homologation_lead_time"
+    description: "Days from installation to homologation approved"
+    calculation: "AVG(milestone_homologation_approved.date - milestone_installation_complete.date)"
+    target: "<45 days"
+    
+  - name: "homologation_approval_rate"
+    description: "% of systems successfully homologated"
+    calculation: "COUNT(milestone_homologation_approved) / COUNT(milestone_installation_complete)"
+    target: ">95%"
+    
+  - name: "rework_rate"
+    description: "% of installations requiring rework"
+    calculation: "COUNT(installations with rework flag) / COUNT(milestone_installation_complete)"
+    target: "<5%"
+    
+  # Engagement KPIs
+  - name: "dashboard_activation_rate"
+    description: "% of installed customers who use dashboard"
+    calculation: "COUNT(DISTINCT user_id with view_dashboard) / COUNT(milestone_homologation_approved)"
+    target: ">90%"
+    
+  - name: "dashboard_dau"
+    description: "Daily active users on dashboard"
+    calculation: "COUNT(DISTINCT user_id with view_dashboard per day) / COUNT(total installed users)"
+    target: ">40%"
+    
+  - name: "dashboard_engagement_time"
+    description: "Average time spent on dashboard per session"
+    calculation: "AVG(session_duration for /account/dashboard)"
+    target: ">5 minutes"
+    
+  # Loyalty KPIs
+  - name: "nps_score"
+    description: "Net Promoter Score"
+    calculation: "% Promoters (9-10) - % Detractors (0-6)"
+    target: ">50"
+    
+  - name: "referral_rate"
+    description: "% of customers who refer friends"
+    calculation: "COUNT(DISTINCT user_id with refer_friend) / COUNT(milestone_homologation_approved)"
+    target: ">30%"
+    
+  - name: "expansion_conversion_rate"
+    description: "% of customers who purchase expansion"
+    calculation: "COUNT(purchase_addon) / COUNT(milestone_homologation_approved)"
+    target: ">15%"
+    
+  - name: "churn_rate"
+    description: "% of customers who churn (no dashboard activity in 90 days)"
+    calculation: "COUNT(users with no dashboard activity in 90d) / COUNT(total installed users)"
+    target: "<10%"
+
+# ============================================
+# REPORTING DASHBOARDS
+# ============================================
+dashboards:
+  - name: "Executive Dashboard"
+    refresh: "daily"
+    metrics:
+      - overall_conversion_rate
+      - revenue_per_visitor
+      - average_order_value
+      - nps_score
+      - installation_lead_time
+      
+  - name: "Acquisition Dashboard"
+    refresh: "real-time"
+    metrics:
+      - traffic_sources
+      - bounce_rate
+      - calculator_usage_rate
+      - configurator_start_rate
+      
+  - name: "Conversion Dashboard"
+    refresh: "hourly"
+    metrics:
+      - add_to_cart_rate
+      - cart_abandonment_rate
+      - financing_request_rate
+      - checkout_completion_rate
+      
+  - name: "Post-Sale Dashboard"
+    refresh: "daily"
+    metrics:
+      - installation_lead_time
+      - homologation_approval_rate
+      - dashboard_activation_rate
+      - nps_score
+      - expansion_conversion_rate
+
+# ============================================
+# ALERTS & THRESHOLDS
+# ============================================
+alerts:
+  - metric: "cart_abandonment_rate"
+    threshold: ">75%"
+    action: "Investigate checkout friction, A/B test checkout flow"
+    
+  - metric: "financing_approval_rate"
+    threshold: "<60%"
+    action: "Review financing partner criteria, offer alternative options"
+    
+  - metric: "installation_lead_time"
+    threshold: ">40 days"
+    action: "Escalate to operations, increase installer capacity"
+    
+  - metric: "nps_score"
+    threshold: "<40"
+    action: "Customer success intervention, identify detractor patterns"
+    
+  - metric: "dashboard_dau"
+    threshold: "<30%"
+    action: "Onboarding improvements, push notification campaigns"
