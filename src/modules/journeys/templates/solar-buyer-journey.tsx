@@ -174,6 +174,11 @@ export function SolarBuyerJourney({
                                 <SegmentList label="Modalidades GD" items={segment.generationHighlights} />
                                 <SegmentList label="Highlights da jornada" items={segment.journeyHighlights} />
                                 <SegmentList label="Triggers de UX" items={segment.uxHighlights} />
+                                <LocalizedClientLink href={`/journeys/${segment.id}`}>
+                                    <Button yelloVariant="outline" size="sm" fullWidth>
+                                        Ver jornada segmentada
+                                    </Button>
+                                </LocalizedClientLink>
                             </CardContent>
                         </Card>
                     ))}

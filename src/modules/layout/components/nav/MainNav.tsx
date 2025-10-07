@@ -7,13 +7,13 @@
 
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { menuByCategory, type MenuItem } from "@lib/menu";
 import { YelloLogo } from "@lib/design-system/components/YelloLogo";
 import { Button } from "@lib/design-system/components/Button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@lib/design-system/components/Card";
 import LocalizedClientLink from "@modules/common/components/localized-client-link";
+import { SEGMENTS } from "@modules/journeys/constants/segments";
 
 export function MainNav() {
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
@@ -124,6 +124,64 @@ export function MainNav() {
                     <LocalizedClientLink href="/sizing">
                       <Button variant="primary" size="sm">
                         Dimensionar Sistema
+                      </Button>
+                    </LocalizedClientLink>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+        </div>
+
+        {/* Jornadas - Mega Menu */}
+        <div
+          className="relative"
+          onMouseEnter={() => setActiveMegaMenu("journeys")}
+          onMouseLeave={() => setActiveMegaMenu(null)}
+        >
+          <Button variant="ghost" size="sm" className="font-medium">
+            Jornadas
+            <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </Button>
+
+          {activeMegaMenu === "journeys" && (
+            <div className="absolute top-full left-0 mt-2 w-screen max-w-3xl z-50 animate-fade-in-top">
+              <Card elevation="floating" className="shadow-2xl">
+                <CardContent className="p-6 space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {SEGMENTS.map((segment) => (
+                      <LocalizedClientLink
+                        key={segment.id}
+                        href={`/journeys/${segment.id}`}
+                        className="group rounded-2xl border border-geist-200 bg-white/80 px-4 py-5 transition-all hover:-translate-y-0.5 hover:border-yello-orange hover:bg-yello-yellow50"
+                      >
+                        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-geist-500">
+                          {segment.subtitle}
+                        </span>
+                        <h3 className="mt-2 text-lg font-semibold text-geist-900 group-hover:text-yello-orange">
+                          {segment.title}
+                        </h3>
+                        <p className="mt-2 text-sm text-geist-600 line-clamp-3">
+                          {segment.overview}
+                        </p>
+                        <div className="mt-3 flex items-center gap-2 text-xs font-semibold text-yello-orange">
+                          Ver jornada completa
+                          <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M13 5l7 7-7 7" />
+                          </svg>
+                        </div>
+                      </LocalizedClientLink>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between rounded-xl border border-yello-yellow/40 bg-yello-yellow50 px-4 py-3">
+                    <p className="text-sm text-geist-700">
+                      Explore as jornadas regulatórias e conecte cada etapa ao catálogo 360º.
+                    </p>
+                    <LocalizedClientLink href="/journeys">
+                      <Button variant="primary" size="sm">
+                        Ver Buyer Journey 360º
                       </Button>
                     </LocalizedClientLink>
                   </div>
