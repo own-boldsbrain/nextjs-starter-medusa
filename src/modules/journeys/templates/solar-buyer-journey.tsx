@@ -288,6 +288,44 @@ export function SolarBuyerJourney({
                 </div>
             </section>
 
+            <section aria-labelledby="regulatory-segments" className="space-y-6">
+                <div className="space-y-3 text-center md:text-left">
+                    <h2 id="regulatory-segments" className="text-3xl font-bold text-geist-900">
+                        Segmentação regulatória por classe tarifária
+                    </h2>
+                    <p className="mx-auto max-w-4xl text-base text-geist-600 md:mx-0">
+                        Estruture decisões de GD conforme Lei 14.300/2022 e o Sistema de
+                        Compensação de Energia Elétrica (SCEE). Cada card reúne contexto de
+                        consumo, modalidades de geração distribuída e ganchos de produto/UX
+                        que devem emergir em tempo real durante a jornada.
+                    </p>
+                </div>
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                    {SEGMENTS.map((segment) => (
+                        <Card key={segment.id} className="h-full border border-geist-100 shadow-sm">
+                            <CardHeader>
+                                <CardTitle className="text-xl font-semibold text-geist-900">
+                                    {segment.title}
+                                </CardTitle>
+                                <CardDescription className="text-sm leading-relaxed text-geist-500">
+                                    {segment.subtitle}
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                                <SegmentList label="Perfil de consumo" items={segment.consumptionHighlights} />
+                                <SegmentList label="Modalidades GD" items={segment.generationHighlights} />
+                                <SegmentList label="Highlights da jornada" items={segment.journeyHighlights} />
+                                <SegmentList label="Triggers de UX" items={segment.uxHighlights} />
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+                <p className="text-xs text-geist-500">
+                    Referências primárias: Lei 14.300/2022, REN 482/2012, REN 1000/2021 e
+                    normas distribuidoras locais para parecer de acesso e integração ao SCEE.
+                </p>
+            </section>
+
             <section aria-labelledby="catalog-entrypoints" className="space-y-8">
                 <header className="space-y-3 text-center">
                     <h2 id="catalog-entrypoints" className="text-3xl font-bold text-geist-900">
