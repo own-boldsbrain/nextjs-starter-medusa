@@ -62,9 +62,9 @@ export default function JourneySegmentPage({ params }: JourneySegmentPageProps) 
     const accessoryCategories = getSegmentCategoryMetas(segment.recommendedCategories.acessorios, categoriesMap);
 
     return (
-        <div className="content-container py-12 space-y-16">
-            <header className="space-y-4 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full border border-yello-yellow/40 bg-yello-yellow100 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-yello-orange">
+        <div className="content-container py-12 space-y-16" data-testid="journey-segment-page">
+            <header className="space-y-4 text-center" data-testid="journey-segment-header">
+                <div className="inline-flex items-center gap-2 rounded-full border border-yello-yellow/40 bg-yello-yellow100 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-yello-orange" data-testid="segment-badge">
                     Buyer Journey · {segment.subtitle}
                 </div>
                 <h1 className="text-5xl font-black text-gradient-yello">
@@ -87,7 +87,7 @@ export default function JourneySegmentPage({ params }: JourneySegmentPageProps) 
                 </div>
             </header>
 
-            <section aria-labelledby="segment-highlights" className="space-y-6">
+            <section aria-labelledby="segment-highlights" className="space-y-6" data-testid="segment-highlights-section">
                 <div className="space-y-3 text-center md:text-left">
                     <h2 id="segment-highlights" className="text-3xl font-bold text-geist-900">
                         Inteligencia regulatoria e operacao
@@ -96,8 +96,8 @@ export default function JourneySegmentPage({ params }: JourneySegmentPageProps) 
                         Utilize os quadros abaixo para configurar discovery, engenharia, checkout e pos-venda com gatilhos especificos deste segmento.
                     </p>
                 </div>
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                    <Card className="h-full border border-geist-100 shadow-sm">
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2" data-testid="segment-highlights-grid">
+                    <Card className="h-full border border-geist-100 shadow-sm" data-testid="segment-card-consumption">
                         <CardHeader>
                             <CardTitle className="text-xl font-semibold text-geist-900">
                                 Perfil de consumo
@@ -110,7 +110,7 @@ export default function JourneySegmentPage({ params }: JourneySegmentPageProps) 
                             <SegmentList label="Pontos de atencao" items={segment.consumptionHighlights} />
                         </CardContent>
                     </Card>
-                    <Card className="h-full border border-geist-100 shadow-sm">
+                    <Card className="h-full border border-geist-100 shadow-sm" data-testid="segment-card-generation">
                         <CardHeader>
                             <CardTitle className="text-xl font-semibold text-geist-900">
                                 Modalidades de geracao
@@ -123,7 +123,7 @@ export default function JourneySegmentPage({ params }: JourneySegmentPageProps) 
                             <SegmentList label="Cenarios prioritarios" items={segment.generationHighlights} />
                         </CardContent>
                     </Card>
-                    <Card className="h-full border border-geist-100 shadow-sm">
+                    <Card className="h-full border border-geist-100 shadow-sm" data-testid="segment-card-journey">
                         <CardHeader>
                             <CardTitle className="text-xl font-semibold text-geist-900">
                                 Jornada end-to-end
@@ -136,7 +136,7 @@ export default function JourneySegmentPage({ params }: JourneySegmentPageProps) 
                             <SegmentList label="Workflow" items={segment.journeyHighlights} />
                         </CardContent>
                     </Card>
-                    <Card className="h-full border border-geist-100 shadow-sm">
+                    <Card className="h-full border border-geist-100 shadow-sm" data-testid="segment-card-ux">
                         <CardHeader>
                             <CardTitle className="text-xl font-semibold text-geist-900">
                                 Triggers de UX
@@ -152,7 +152,7 @@ export default function JourneySegmentPage({ params }: JourneySegmentPageProps) 
                 </div>
             </section>
 
-            <section aria-labelledby="segment-categories" className="space-y-8">
+            <section aria-labelledby="segment-categories" className="space-y-8" data-testid="segment-categories-section">
                 <header className="space-y-3 text-center">
                     <h2 id="segment-categories" className="text-3xl font-bold text-geist-900">
                         Categorias conectadas ao catalogo

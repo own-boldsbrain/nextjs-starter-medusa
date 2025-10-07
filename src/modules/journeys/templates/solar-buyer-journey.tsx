@@ -100,9 +100,9 @@ export function SolarBuyerJourney({
     acessorios,
 }: SolarBuyerJourneyProps) {
     return (
-        <div className="content-container py-12 space-y-16">
-            <header className="text-center space-y-4">
-                <div className="inline-flex items-center gap-2 rounded-full border border-yello-yellow/40 bg-yello-yellow100 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-yello-orange">
+        <div className="content-container py-12 space-y-16" data-testid="solar-buyer-journey">
+            <header className="text-center space-y-4" data-testid="journey-360-header">
+                <div className="inline-flex items-center gap-2 rounded-full border border-yello-yellow/40 bg-yello-yellow100 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-yello-orange" data-testid="journey-360-badge">
                     Jornada 360º
                 </div>
                 <h1 className="text-5xl font-black text-gradient-yello">
@@ -116,13 +116,13 @@ export function SolarBuyerJourney({
                 </p>
             </header>
 
-            <section aria-labelledby="journey-steps">
+            <section aria-labelledby="journey-steps" data-testid="journey-steps-section">
                 <h2 id="journey-steps" className="sr-only">
                     Etapas da jornada do comprador
                 </h2>
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3" data-testid="journey-steps-grid">
                     {JOURNEY_STAGES.map((stage) => (
-                        <Card key={stage.id} elevation="raised" className="h-full border border-geist-100 shadow-sm">
+                        <Card key={stage.id} elevation="raised" className="h-full border border-geist-100 shadow-sm" data-testid={`journey-stage-${stage.id}`}>
                             <CardHeader>
                                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-yello-yellow to-yello-magenta text-lg font-bold text-black">
                                     {stage.label}
@@ -146,7 +146,7 @@ export function SolarBuyerJourney({
                 </div>
             </section>
 
-            <section aria-labelledby="regulatory-segments" className="space-y-6">
+            <section aria-labelledby="regulatory-segments" className="space-y-6" data-testid="regulatory-segments-section">
                 <div className="space-y-3 text-center md:text-left">
                     <h2 id="regulatory-segments" className="text-3xl font-bold text-geist-900">
                         Segmentação regulatória por classe tarifária
@@ -158,9 +158,9 @@ export function SolarBuyerJourney({
                         que devem emergir em tempo real durante a jornada.
                     </p>
                 </div>
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2" data-testid="segments-grid">
                     {SEGMENTS.map((segment) => (
-                        <Card key={segment.id} className="h-full border border-geist-100 shadow-sm">
+                        <Card key={segment.id} className="h-full border border-geist-100 shadow-sm" data-testid={`segment-card-${segment.id}`}>
                             <CardHeader>
                                 <CardTitle className="text-xl font-semibold text-geist-900">
                                     {segment.title}
