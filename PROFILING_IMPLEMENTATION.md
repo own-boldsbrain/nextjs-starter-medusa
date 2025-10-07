@@ -29,26 +29,31 @@
 ### Páginas Instrumentadas
 
 ✅ **Layout Principal**
+
 - Arquivo: `src/app/[countryCode]/(main)/layout.tsx`
 - Instrumentação: `<ProfilingControls />` adicionado ao layout
 - Alcance: Todas as páginas do app
 
 ✅ **Página de Produto**
+
 - Arquivo: `src/app/[countryCode]/(main)/products/[handle]/page.tsx`
 - Instrumentação: `<ProfilerWrapper id="ProductPage">`
 - Métricas: Render de template de produto
 
 ✅ **Página de Coleção**
+
 - Arquivo: `src/app/[countryCode]/(main)/collections/[handle]/page.tsx`
 - Instrumentação: `<ProfilerWrapper id="CollectionPage">`
 - Métricas: Render de listagem de coleção
 
 ✅ **Página de Carrinho**
+
 - Arquivo: `src/app/[countryCode]/(main)/cart/page.tsx`
 - Instrumentação: `<ProfilerWrapper id="CartPage">`
 - Métricas: Render de carrinho de compras
 
 ✅ **Página de Categoria**
+
 - Arquivo: `src/app/[countryCode]/(main)/categories/[...category]/page.tsx`
 - Instrumentação: `<ProfilerWrapper id="CategoryPage">`
 - Métricas: Render de listagem de categoria
@@ -75,7 +80,7 @@ Navegue para: `http://localhost:3000`
 
 Execute as seguintes ações para coletar dados:
 
-#### Cenários de Teste:
+#### Cenários de Teste
 
 1. **Navegação em Produtos**
    - Acesse `/us/products/medusa-tshirt` (ou qualquer produto)
@@ -101,6 +106,7 @@ Execute as seguintes ações para coletar dados:
 ### 5. Visualizar Dados no Painel
 
 O painel mostra:
+
 - **Components Tracked**: Número de componentes instrumentados
 - **Total Renders**: Total de renders capturados
 - **Total Duration**: Tempo acumulado de render
@@ -109,6 +115,7 @@ O painel mostra:
 ### 6. Exportar Dados
 
 Clique em um dos botões de exportação:
+
 - **JSON**: Dados brutos para análise programática
 - **CSV**: Para análise em Excel/Google Sheets
 - **Flame**: Para visualização em flamegraph
@@ -116,7 +123,7 @@ Clique em um dos botões de exportação:
 ### 7. Visualizar Flamegraph
 
 1. Clique em **Flame** para baixar o JSON
-2. Acesse: https://www.speedscope.app/
+2. Acesse: <https://www.speedscope.app/>
 3. Arraste o arquivo JSON baixado
 4. Analise o flamegraph interativo
 
@@ -159,18 +166,22 @@ Abra DevTools (F12) e vá para Console para ver logs detalhados:
 ### Sinais de Alerta
 
 🔴 **Componente re-renderiza sem mudança de props**
+
 - Causa: Parent re-renderiza ou contexto muda
 - Solução: React.memo ou otimizar parent
 
 🔴 **actualDuration > 50ms**
+
 - Causa: Lógica pesada ou muitos elementos
 - Solução: Virtualização, memoização, code splitting
 
 🔴 **Updates em cascata**
+
 - Causa: Estado mal estruturado
 - Solução: Revisar arquitetura de estado
 
 🔴 **baseDuration >> actualDuration**
+
 - Sinal: Memoização funcionando bem ✅
 
 ## 🛠️ Desenvolvimento

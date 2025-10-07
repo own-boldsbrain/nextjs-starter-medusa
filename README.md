@@ -110,6 +110,45 @@ NEXT_PUBLIC_STRIPE_KEY=<your-stripe-public-key>
 
 You'll also need to setup the integrations in your Medusa server. See the [Medusa documentation](https://docs.medusajs.com) for more information on how to configure [Stripe](https://docs.medusajs.com/resources/commerce-modules/payment/payment-provider/stripe#main).
 
+# Performance Profiling 📊
+
+This project includes comprehensive React profiling tools for performance analysis.
+
+## Quick Start
+
+```powershell
+npm run dev
+# Open http://localhost:3000 and click the "📊 Profiler" button
+```
+
+## Documentation
+
+- **[Quick Start](./PROFILING_QUICKSTART.md)** - Get started in 5 minutes
+- **[Index](./PROFILING_INDEX.md)** - Complete documentation index
+- **[Guide](./PROFILING_GUIDE.md)** - Step-by-step profiling guide
+- **[Implementation](./PROFILING_IMPLEMENTATION.md)** - Status and usage
+- **[Executive Summary](./PROFILING_EXECUTIVE_SUMMARY.md)** - Overview and metrics
+
+## Features
+
+✅ Real-time render metrics collection  
+✅ Floating UI controls panel  
+✅ Export as JSON, CSV, or Flamegraph  
+✅ Integration with speedscope.app  
+✅ Instrumented critical pages (Product, Collection, Category, Cart)  
+✅ Render counting on key components (Button, PanelCard)
+
+## Tools
+
+- **ProfilerWrapper** - React Profiler wrapper component
+- **ProfilingControls** - Floating control panel
+- **withRenderCounter** - HOC for render counting
+- **Helper Script** - Console utilities (`profiling-helper.js`)
+
+See [PROFILING_INDEX.md](./PROFILING_INDEX.md) for complete documentation.
+
+---
+
 # Resources
 
 ## Learn more about Medusa
