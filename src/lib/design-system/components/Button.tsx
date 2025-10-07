@@ -14,6 +14,7 @@
 
 import React, { forwardRef, useMemo, ButtonHTMLAttributes } from 'react';
 import { Button as MedusaButton } from '@medusajs/ui';
+import { withRenderCounter } from '@/lib/design-system/dev/withRenderCounter'
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
@@ -117,4 +118,6 @@ const ButtonInner = forwardRef<HTMLButtonElement, ButtonProps>(
 const Button = React.memo(ButtonInner);
 Button.displayName = 'Button';
 
-export { Button, yelloButtonVariants };
+const ExportedButton = process.env.NODE_ENV === 'development' ? withRenderCounter(Button, 'Button') : Button
+
+export { ExportedButton as Button, yelloButtonVariants }

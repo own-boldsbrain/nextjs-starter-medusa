@@ -9,6 +9,7 @@ import React, { useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Badge, Button } from '@/lib/design-system/components';
 import { formatPrice } from '@/lib/utils';
+import { withRenderCounter } from '@/lib/design-system/dev/withRenderCounter';
 
 export interface PanelCardProps {
     panel: {
@@ -107,4 +108,6 @@ const PanelCardInner: React.FC<PanelCardProps> = ({ panel, onViewDetails, onAddT
 const PanelCard = React.memo(PanelCardInner);
 PanelCard.displayName = 'PanelCard';
 
-export { PanelCard };
+const ExportedPanelCard = process.env.NODE_ENV === 'development' ? withRenderCounter(PanelCard, 'PanelCard') : PanelCard
+
+export { ExportedPanelCard as PanelCard };
