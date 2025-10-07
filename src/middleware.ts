@@ -3,73 +3,21 @@ import { NextRequest, NextResponse } from "next/server"
 
 const BACKEND_URL = process.env.MEDUSA_BACKEND_URL
 const PUBLISHABLE_API_KEY = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
-const DEFAULT_REGION = process.env.NEXT_PUBLIC_DEFAULT_REGION || "us"
+const DEFAULT_REGION = process.env.NEXT_PUBLIC_DEFAULT_REGION || "br"
 
 const regionMapCache = {
-  regionMap: new Map<string, HttpTypes.StoreRegion>(),
+  regionMap: new Map<string, HttpTypes.StoreRegion>([
+    ["br", {
+      id: "reg_br",
+      currency_code: "brl",
+      countries: [{ iso_2: "br" }]
+    } as HttpTypes.StoreRegion]
+  ]),
   regionMapUpdated: Date.now(),
 }
 
 async function getRegionMap(cacheId: string) {
-  const { regionMap, regionMapUpdated } = regionMapCache
-
-  if (!BACKEND_URL) {
-    console.warn(
-      "Middleware.ts: MEDUSA_BACKEND_URL not defined, skipping region fetch. Using default region."
-    )
-    // Return empty map to allow fallback to default region
-    return new Map([["us", { id: "default", currency_code: "usd" }]])
-  }
-
-  if (
-    !regionMap.keys().next().value ||
-    regionMapUpdated < Date.now() - 3600 * 1000
-  ) {
-    try {
-      // Fetch regions from Medusa. We can't use the JS client here because middleware is running on Edge and the client needs a Node environment.
-      const { regions } = await fetch(`${BACKEND_URL}/store/regions`, {
-        headers: {
-          "x-publishable-api-key": PUBLISHABLE_API_KEY!,
-        },
-        next: {
-          revalidate: 3600,
-          tags: [`regions-${cacheId}`],
-        },
-        cache: "force-cache",
-      }).then(async (response) => {
-        const json = await response.json()
-
-        if (!response.ok) {
-          throw new Error(json.message)
-        }
-
-        return json
-      })
-
-      if (!regions?.length) {
-        console.warn(
-          "Middleware.ts: No regions found in Medusa. Using default region."
-        )
-        return new Map([["us", { id: "default", currency_code: "usd" }]])
-      }
-
-      // Create a map of country codes to regions.
-      regions.forEach((region: HttpTypes.StoreRegion) => {
-        region.countries?.forEach((c) => {
-          regionMapCache.regionMap.set(c.iso_2 ?? "", region)
-        })
-      })
-
-      regionMapCache.regionMapUpdated = Date.now()
-    } catch (error) {
-      console.warn(
-        `Middleware.ts: Failed to fetch regions from ${BACKEND_URL}: ${error}. Using default region.`
-      )
-      // Return default region map on error
-      return new Map([["us", { id: "default", currency_code: "usd" }]])
-    }
-  }
-
+  // Return hardcoded region map for development without backend
   return regionMapCache.regionMap
 }
 
