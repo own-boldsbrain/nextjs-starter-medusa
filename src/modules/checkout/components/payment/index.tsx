@@ -107,7 +107,7 @@ const Payment = ({
   }, [isOpen])
 
   return (
-    <div className="bg-white">
+    <div className="bg-white" data-testid="checkout-payment">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
@@ -141,6 +141,7 @@ const Payment = ({
               <RadioGroup
                 value={selectedPaymentMethod}
                 onChange={(value: string) => setPaymentMethod(value)}
+                data-testid="payment-methods-list"
               >
                 {availablePaymentMethods.map((paymentMethod) => (
                   <div key={paymentMethod.id}>
@@ -167,7 +168,7 @@ const Payment = ({
           )}
 
           {paidByGiftcard && (
-            <div className="flex flex-col w-1/3">
+            <div className="flex flex-col w-1/3" data-testid="gift-card-payment">
               <Text className="txt-medium-plus text-ui-fg-base mb-1">
                 Payment method
               </Text>

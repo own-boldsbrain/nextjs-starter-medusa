@@ -40,7 +40,7 @@ const Addresses = ({
   const [message, formAction] = useActionState(setAddresses, null)
 
   return (
-    <div className="bg-white">
+    <div className="bg-white" data-testid="checkout-addresses">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
@@ -62,17 +62,18 @@ const Addresses = ({
         )}
       </div>
       {isOpen ? (
-        <form action={formAction}>
+        <form action={formAction} data-testid="checkout-addresses-form">
           <div className="pb-8">
             <ShippingAddress
               customer={customer}
               checked={sameAsBilling}
               onChange={toggleSameAsBilling}
               cart={cart}
+              data-testid="shipping-address-form"
             />
 
             {!sameAsBilling && (
-              <div>
+              <div data-testid="billing-address-section">
                 <Heading
                   level="h2"
                   className="text-3xl-regular gap-x-4 pb-6 pt-8"
@@ -80,7 +81,7 @@ const Addresses = ({
                   Billing address
                 </Heading>
 
-                <BillingAddress cart={cart} />
+                <BillingAddress cart={cart} data-testid="billing-address-form" />
               </div>
             )}
             <SubmitButton className="mt-6" data-testid="submit-address-button">

@@ -19,7 +19,7 @@ const Review = ({ cart }: { cart: any }) => {
     (cart.payment_collection || paidByGiftcard)
 
   return (
-    <div className="bg-white">
+    <div className="bg-white" data-testid="checkout-review">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
@@ -35,7 +35,7 @@ const Review = ({ cart }: { cart: any }) => {
       </div>
       {isOpen && previousStepsCompleted && (
         <>
-          <div className="flex items-start gap-x-1 w-full mb-6">
+          <div className="flex items-start gap-x-1 w-full mb-6" data-testid="order-review-terms">
             <div className="w-full">
               <Text className="txt-medium-plus text-ui-fg-base mb-1">
                 By clicking the Place Order button, you confirm that you have

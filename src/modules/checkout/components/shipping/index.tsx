@@ -149,7 +149,7 @@ const Shipping: React.FC<ShippingProps> = ({
   }, [isOpen])
 
   return (
-    <div className="bg-white">
+    <div className="bg-white" data-testid="checkout-shipping">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
@@ -239,6 +239,7 @@ const Shipping: React.FC<ShippingProps> = ({
                       return handleSetShippingMethod(v, "shipping")
                     }
                   }}
+                  data-testid="shipping-options-list"
                 >
                   {_shippingMethods?.map((option) => {
                     const isDisabled =
@@ -314,6 +315,7 @@ const Shipping: React.FC<ShippingProps> = ({
                         return handleSetShippingMethod(v, "pickup")
                       }
                     }}
+                    data-testid="pickup-options-list"
                   >
                     {_pickupMethods?.map((option) => {
                       return (
@@ -382,7 +384,7 @@ const Shipping: React.FC<ShippingProps> = ({
         </>
       ) : (
         <div>
-          <div className="text-small-regular">
+          <div className="text-small-regular" data-testid="shipping-method-summary">
             {cart && (cart.shipping_methods?.length ?? 0) > 0 && (
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
