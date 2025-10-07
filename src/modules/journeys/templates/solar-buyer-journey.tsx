@@ -24,6 +24,170 @@ interface SolarBuyerJourneyProps {
     acessorios: CategoryMeta[];
 }
 
+interface SegmentDefinition {
+    id: string;
+    title: string;
+    subtitle: string;
+    consumptionHighlights: string[];
+    generationHighlights: string[];
+    journeyHighlights: string[];
+    uxHighlights: string[];
+}
+
+const SEGMENTS: SegmentDefinition[] = [
+    {
+        id: "residential-b1",
+        title: "Residencial B1",
+        subtitle: "Grupo B | 120-800 kWh/mes | Mono/Bifasico",
+        consumptionHighlights: [
+            "Curva de maior consumo no período noturno com eletrodomésticos e climatização",
+            "Elegível à Tarifa Branca (exceto baixa renda); simule deslocamento para fora da ponta",
+            "Custo de disponibilidade permanece (30, 50 ou 100 kWh) mesmo com créditos positivos",
+        ],
+        generationHighlights: [
+            "Microgeração on-site até 75 kW com créditos válidos por 60 meses",
+            "Autoconsumo remoto para segunda residência, apartamento ou garagem",
+            "Geração compartilhada ou condomínio solar com rateio por unidade consumidora",
+        ],
+        journeyHighlights: [
+            "Descoberta por fatura/CEP -> diagnóstico HSP + histórico de 12 meses",
+            "Dimensionamento IA alinhado a metas GC 115–140% e opção de storage compacto",
+            "Checkout com PIX, cartão ou Parcelado Solfácil (9–10x) e homologação digital",
+            "Pós-venda com monitoramento em app e alertas sobre custo mínimo e créditos",
+        ],
+        uxHighlights: [
+            "Badge de elegibilidade Tarifa Branca e sugestão de deslocamento de cargas",
+            "Aviso automático de custo de disponibilidade e vencimento de créditos",
+            "Recomendação de autoconsumo remoto para apartamentos",
+        ],
+    },
+    {
+        id: "rural-b2",
+        title: "Rural B2",
+        subtitle: "Grupo B | Agro/irrigação | Trifásico",
+        consumptionHighlights: [
+            "Cargas sazonais (bombas, pivôs) com picos diurnos",
+            "Tarifa Convencional ou Branca para quem desloca bombeamento",
+            "Exige proteção contra surtos e poeira em ambientes severos",
+        ],
+        generationHighlights: [
+            "Micro ou mini GD on-site; híbrido/off-grid para áreas remotas",
+            "Autoconsumo remoto entre sede, pivôs e estruturas de irrigação",
+            "Créditos 60 meses e possibilidade de cooperativa entre produtores",
+        ],
+        journeyHighlights: [
+            "Perfil de carga sazonal -> simulação horária com Tarifa Branca",
+            "Projeto com soft-starter/VFD e stringing otimizado para poeira e sombreamento",
+            "Financiamento rural (Pronaf/Pronamp) + Parcelado Solfácil para CAPEX complementar",
+            "Execução com mitigação de poeira e plano de O&M preditivo",
+        ],
+        uxHighlights: [
+            "Sugestão de kit híbrido para áreas críticas sem rede",
+            "CTA para monitoramento de bombas e alertas de sazonalidade",
+            "Checklist ambiental (APP, outorga) integrado ao fluxo",
+        ],
+    },
+    {
+        id: "commercial-b3",
+        title: "Comércio / Serviços B3",
+        subtitle: "Grupo B | Trifásico | Multi-lojas",
+        consumptionHighlights: [
+            "Curvas diurnas com câmaras frias, HVAC e iluminação",
+            "Elegível à Tarifa Branca; relevante para redes com horário de ponta elevado",
+            "Possibilidade de integrar geração à estratégia ESG/marketing verde",
+        ],
+        generationHighlights: [
+            "Micro/mini on-site com mitigação de sombreamento (otimizadores, MLPE)",
+            "Autoconsumo remoto entre lojas e depósitos; condomínio comercial para shoppings",
+            "Créditos 60 meses; excedentes podem servir operações 24/7",
+        ],
+        journeyHighlights: [
+            "Upload de 3 faturas -> diagnóstico TOU (Branca) + curva térmica",
+            "Projeto com strings dedicados a cargas críticas e plano de redundância",
+            "Upsell de storage para shaving interno e EV chargers para público",
+            "Checkout omnichannel + execução sem interromper operação + SLA pós-venda",
+        ],
+        uxHighlights: [
+            "Card \"economia em horário de ponta\" com comparador Branca x Convencional",
+            "Sugestão de plano multi-UC para redes de lojas",
+            "Indicador ESG (tCO2 evitadas) visível no dashboard",
+        ],
+    },
+    {
+        id: "medium-voltage",
+        title: "Grupo A (A3a/A4...)",
+        subtitle: "Média/Alta tensão | Demanda contratada",
+        consumptionHighlights: [
+            "Perfil TOU com tarifas Azul ou Verde; penalidades por ultrapassagem",
+            "Demanda contratada faturada mesmo com créditos de energia",
+            "Necessidade de parecer de acesso e estudos de proteção",
+        ],
+        generationHighlights: [
+            "Mini GD 75 kW - 3 MW (até 5 MW em casos específicos) on-site ou solo",
+            "Autoconsumo remoto, consórcios ou PPAs para CAPEX zero",
+            "Integração com geração despachável (diesel/gás) para continuidade",
+        ],
+        journeyHighlights: [
+            "Auditoria tarifária Azul vs Verde e análise de demanda",
+            "Pré-projeto com layout solo/telhado e rota de conexão",
+            "Análise CAPEX vs PPA/EaaS e parecer de acesso ANEEL",
+            "Execução EPC + O&M com metas de disponibilidade >99%",
+        ],
+        uxHighlights: [
+            "Banner \"energia compensa, demanda não\" com simulador Azul x Verde",
+            "Checklist de documentação (ART, parecer de acesso, PPE)",
+            "Dashboard com KPIs de demanda, fator de carga e SLA",
+        ],
+    },
+    {
+        id: "public-sector",
+        title: "Poder Público / Iluminação",
+        subtitle: "B4 e prédios públicos | Consórcios",
+        consumptionHighlights: [
+            "B4 (iluminação) não adere à Tarifa Branca; prédios públicos seguem B3 ou Grupo A",
+            "Necessidade de transparência orçamentária e compliance",
+            "Projetos vinculados a métricas ESG e metas climáticas municipais",
+        ],
+        generationHighlights: [
+            "Geração compartilhada municipal (fazenda solar) com rateio multi-UC",
+            "Autoconsumo em condomínios administrativos e escolas",
+            "Modelos PPA/EaaS para evitar impacto em CAPEX público",
+        ],
+        journeyHighlights: [
+            "Mapeamento de cargas públicas e centros de custo",
+            "Modelo jurídico (consórcio, cooperativa, concessão)",
+            "Implantação de usina remota + governança de créditos",
+            "Portal de transparência com métricas ESG e relatórios",
+        ],
+        uxHighlights: [
+            "CTA para compliance e documentação licitatória",
+            "Template de relatório ESG para publicação",
+            "Indicadores de economia por secretaria ou distrito",
+        ],
+    },
+];
+
+function SegmentList({
+    label,
+    items,
+}: {
+    label: string;
+    items: string[];
+}) {
+    return (
+        <div className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-geist-500">
+                {label}
+            </p>
+            <ul className="list-disc list-inside space-y-1 text-sm text-geist-600">
+                {items.map((item, index) => (
+                    <li key={`${label}-${index}`}>{item}</li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
 const JOURNEY_STAGES: JourneyStage[] = [
     {
         id: "discover",
